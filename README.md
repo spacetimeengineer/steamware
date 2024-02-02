@@ -2,23 +2,36 @@
 Hardware Assembly Language
 STEAMWare ( Science - Technology - Engineering - Art - Mathematics ) - Ware
 
-Note from the author
+*Note from the author
 
-I didnt want to complicate this product. I wanted it free and simple. I believe this is what will give it power.
-
-What
-
-STEAMWare makes reference to physical STEAMWare and the STEAMWare.py file that produces it.
+I didnt want to complicate this product. I wanted it simple and I wanted it free so the benifits go to you first. Get dangerous. 
 
 
 
-    $ STEAMWare.py --basis_unit = 10 --padding = 0.134
 
-    $ STEAMWare.py --basis_unit = 10 --padding = 0.134 XXX
 
-    $ STEAMWare.py --basis_unit = 10 --padding = 0.134 XXXZ
 
-    $ STEAMWare.py --basis_unit = 10 --padding = 0.134 XXXZCXX
+Legend
 
-    $ STEAMWare.py --basis_unit = 10 --padding = 0.134 XXYYAABBX
+
+
+
+
+
+
+
+Example Parts
+
+    $ python3 steamware.py --basis_unit 10 --fit_padding 0.134
+
+    $ python3 steamware.py --basis_unit 10 --fit_padding 0.134 --track_string XXX
+
+    $ python3 steamware.py --basis_unit 10 --fit_padding 0.134 --track_string XXXZ
+
+    $ python3 steamware.py --basis_unit 10 --fit_padding 0.134 --track_string XXXZCXX
+
+    $ python3 steamware.py --basis_unit 10 --fit_padding 0.134 --track_string XXYYAABBX
+
+
+
 
