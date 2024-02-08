@@ -21,6 +21,37 @@ In short, STEAMWare refers to a new (LEGO-like) modular part family and the open
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="600" />
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="600" />
     
+
+
+
+Examples:
+
+    $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XYABBBBBZCZZZZZ
+
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
+
+    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXX
+
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
+
+    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXXZ
+
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
+
+    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXXZCXX
+
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
+
+    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXYYAABBX
+
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
+
+
+
+Each Call creates an .scad file, .stl file and a a .png file of the same filename.
+
+
+
 OpenSource
 ==========
 
@@ -77,31 +108,3 @@ rom this viewpoint CNC machnines onyl are better for certsain parts.
 
 3.) Abstrracted from materials or manufacturing process.
 
-
-
-
-Examples:
-
-    $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XYABBBBBZCZZZZZ
-
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
-
-    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXX
-
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
-
-    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXXZ
-
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
-
-    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXXZCXX
-
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
-
-    $ python3 sw.py --fn donught --basis_unit 10 --fit_padding 0.134 --track_string XXYYAABBX
-
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/donught.png)
-
-
-
-Each Call creates an .scad file, .stl file and a a .png file of the same filename.
