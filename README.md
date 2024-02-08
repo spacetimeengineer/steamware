@@ -2,9 +2,12 @@
 Hardware Assembly Language
 STEAMWare ( Science - Technology - Engineering - Art - Mathematics ) - Ware
 
+
+
+
 *Note from the author*
 
-This is an extremely potent technology. Ill leave it at that. Built it for kids and adults. I want it simple and I want it free and I want the savings to go to the people who matter most. Be a builder. DO with these what YOU want.
+This is an extremely potent technology. Ill leave it at that. Built it for kids, adults and robots. I want it simple and I want it free and I want to reinvest the value of this tech into itself and the benefits go to us all. Be a builder. DO with these what YOU want. 
 
 
 
@@ -13,15 +16,14 @@ This is an extremely potent technology. Ill leave it at that. Built it for kids 
 What is STEAMWare?
 ==================
 
-In short, STEAMWare refers to a new (LEGO-like) modular part family and the open-source software utility which generates them. LEGO-Like-apparent but so much more in reality and built to solve the scaling problems.
+In short, STEAMWare refers to a new (LEGO-like) modular part family and the open-source software utility which generates them. 
 
-simply by fit and join; If everything is cubelike then everything should slide into place. The padding which is applied to each block relative to the basis unit is required to make binding less tight. As long as relativcie positioning of blocks is managed by a basis unit coordinate system then everything is great.
-
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/master/resources/legend_0.png)
 
 OpenSource
 ==========
 
-Pull requests are appreciated. But bear with me I am slow and dumb as fucking molasis most days. 
+Pull requests are appreciated. But bear with me I am slow fucking molasis most days. 
 
 *Benefits*
 
