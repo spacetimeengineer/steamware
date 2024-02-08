@@ -18,8 +18,8 @@ What is STEAMWare?
 
 In short, STEAMWare refers to a new (LEGO-like) modular part family and the open-source software utility which generates them. 
 
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only))
-![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only))         
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only width="300")
+![alt text](https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only width="300")      
 OpenSource
 ==========
 
