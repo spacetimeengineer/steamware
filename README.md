@@ -22,8 +22,11 @@ In short, STEAMWare refers to a new (LEGO-like) modular part family and the open
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="700" />
     
 
+Instructions
+============
 
-
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="1000" />
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="1000" />
 Examples:
 
     $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XYABBBBBZCZZZZZ
