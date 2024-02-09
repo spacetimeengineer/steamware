@@ -25,6 +25,22 @@ In short, STEAMWare refers to a new (LEGO-like) modular part family and the open
 Instructions
 ============
 
+fn : File Name
+==============
+This is just the name of the files which will be generated without the extention. Any generated files will have this name plus whatever extension it requires.
+
+bu : Basis Unit
+===============
+This is just the name of the files which will be generated without the extention. Any generated files will have this name plus whatever extension it requires.
+
+fn : Fit Padding
+==============
+This is the total amount of distance subtracted from a basis unit per block across one dimension. This variable ensures variability so that joinery can be loose or tight. 
+
+ts : Track String
+==============
+This is the definition of a track. It uses Translation Instruction X, Y, Z, A, B, C Scale Modifyer Instruction U, D, and Type Modifies Instruction
+
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="1000" />
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="1000" />
 Examples:
