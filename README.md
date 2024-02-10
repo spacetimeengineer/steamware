@@ -22,8 +22,10 @@ This is just the name of the files which will be generated without the extention
 bu : Basis Unit
 ===============
 This is just the name of the files which will be generated without the extention. Any generated files will have this name plus whatever extension it requires.
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="700" />
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="700" />
+
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" />
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" />
+
 fn : Fit Padding
 ==============
 This is the total amount of distance subtracted from a basis unit per block across one dimension. This variable ensures variability so that joinery can be loose or tight. 
@@ -35,8 +37,8 @@ This is the definition of a track. It uses Translation Instruction X, Y, Z, A, B
 
 
 
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="1000" />
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="1000" />
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" />
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only"/>
 Examples:
 
     $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XYABBBBBZCZZZZZ
