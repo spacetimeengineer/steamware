@@ -19,7 +19,7 @@ LEGO provides parts that they manufacturte and it is not legal to manufacture LE
 
 STEAMWare provides infinite parts and all with garenteed modular properties.
 
-
+STEAMWare is a python s ript which builds openSCAD files that point to parts.
 
 
 fn : File Name(s)
