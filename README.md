@@ -1,7 +1,6 @@
 *Note from the author*
 
-This is an extremely potent technology. Ill leave it at that. Built it for kids, adults and robots. I want it simple and I want it free and I want to reinvest the value of this tech into itself and the benefits go to us all. Be a builder. DO with these what YOU want. 
-
+STEAMWare is a potent technology built for reasons difficult to explain. You may think of STEAMWare as hyper-modular suite of parts with utility and recreational grade properties which may be 3D printed.
 
 
 
@@ -9,7 +8,17 @@ This is an extremely potent technology. Ill leave it at that. Built it for kids,
 What is STEAMWare?
 ==================
 
-STEAMWare refers to a modular part family and the software utility which generates them. It is open source. It is LE
+STEAMWare refers to an open source modular part family and the software utilities which generates them. STEAMWare aims to make a fully open source baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope of the author that this style of manufacturing will overwhelm traditional manufacturing schools of thought. These parts are hyper modular and carry infinite permutations wehich can be designed and generated on the fly. STEAMWare has a very useful property where the configurations can be visually discerned or mentally encoded. This makes labeling with an infinite permutation set a non-issue.
+
+You may think of STEAMWare as in many ways similar to the LEGO company except a few key differences.
+
+STEAMWare is not a company but a repository which provides free parts. The only cost is the material for 3D prining or otherwise and the energy needeed to make it. The desing and labeling component is taken care of from the outset.
+
+LEGO provides parts that they manufacturte and it is not legal to manufacture LEGOs yourself and it in any event is not appreciated by the LEGO company.
+
+
+STEAMWare provides infinite parts and all with garenteed modular properties.
+
 
 
 
@@ -47,3 +56,9 @@ Examples:
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
 
 
+FUTURE OF STEAMWARE
+===================
+- Modular Gearboxes / Modular Differentials
+- Modular Gears.
+- Algorithms that build modular housing for any kind of part. Motors, PCBs, Computers, Devices, Ect, Wires.
+- Housing for well known parts.
