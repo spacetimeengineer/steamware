@@ -24,11 +24,11 @@ STEAMWare provides infinite parts and all with garenteed modular properties.
 
 fn : File Name(s)
 =================
-fn is the baseline-name for the files which will be generated without the extention. Any generated files will have this name plus whatever extension the file requires.
+'fn' is the baseline-name for the files which will be generated without the extention. Any generated files will have this name plus whatever extension the file requires.
 
 bu : Basis Unit
 ===============
-bu is just the name of the files which will be generated without the extention. Any generated files will have this name plus whatever extension it requires.
+'bu' makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and hieght of each block unit within the STEAMWare coordinate system. Basis-units are not physical, they are the frame in which track strings define a STEAMWare element. The block units themselves are physical and derive from basis units but are slightly smaller due to the padding which is subtracted however a coupler mesh is applied for every character in a track string so that said padding wont undermine binding intentions. It is important to note that binding is not ensured becasue blocks are adjacent. Binding is only applied for each character in the track string. 
 
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" />
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" />
