@@ -39,7 +39,11 @@ fp is the total amount of distance subtracted from a basis unit per block for th
 
 ts : Track String
 ==============
-ts is the track string. It is an instruction which builds objects wwith ensured modularity. Due to the discrete cubic nature, All blocks of an identical or mathematically reklated basis unit have garenteed modular poroperties. It uses Translation Instruction X, Y, Z, A, B, C Scale Modifyer Instruction U, D, and Type Modifies Instruction.
+The 'ts' variable is the track string. Each character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and express garenteed modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit have garenteed modular poroperties. The translation instruction characters are X, Y, Z, A, B, C which map to translations in the ( X , Y , Z , -X , -Y , -Z ) directions of euclidian space at basis unit steps. It can change scale by 1/3 or 3 depending on the scale modifyer instruction  characters: U, D
+
+
+
+, and Type Modifies Instruction.
 
 
 
