@@ -54,7 +54,10 @@ ts is the track string. It is an instruction which builds objects wwith ensured 
 
     $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
 
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2D.png#gh-dark-mode-only" />
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" />
 
+    $ python3 sw.py --fn cross --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
 
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
