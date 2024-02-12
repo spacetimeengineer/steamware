@@ -47,10 +47,12 @@ ts is the track string. It is an instruction which builds objects wwith ensured 
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" />
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" />
 
+    $ python3 sw.py --fn example_part --bu 10 --fp 0.134 --ts XXDXXX
+
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1D.png#gh-dark-mode-only" />
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1L.png#gh-light-mode-only" />
 
-    $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XYABBBBBZCZZZZZ
+    $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
 
 
 
