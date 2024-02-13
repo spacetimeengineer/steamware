@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os, sys
 import shutil
+import argparse
 
 
 
@@ -949,7 +950,7 @@ if __name__ == "__main__":
     
     #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
     
-    CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
+    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
     
     # q: Make a new track of a 4x4x4 cube with a 1x1x1 cube in the center.      
     # q: Make a new track of a 4x4x4 cube with a 1x1x1 cube in the center.
@@ -960,4 +961,14 @@ if __name__ == "__main__":
     #q: Make 
     
     
-    
+    parser = argparse.ArgumentParser()
+
+    #-db DATABASE -u USERNAME -p PASSWORD -size 20
+    parser.add_argument("--fn", "--filenames", help="File Names", type=str)
+    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float)
+    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float)
+    parser.add_argument("--ts", "--track_string", help="Track String", type=str)
+
+    args = parser.parse_args()
+
+    CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
