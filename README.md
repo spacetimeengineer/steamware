@@ -52,6 +52,7 @@ Steamware is geometry, not material ofcourse unless you are talking 3D printing 
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="600"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="600"/>
+<em>This is a block unit and is roughly the size of the basis unit but minus some padding.</em>
 </p>
 
 **fp** : Fit Padding
@@ -68,6 +69,7 @@ The **ts** variable is the track string. Each character in the track string repr
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="500"/>
+<em>image_caption</em>
 </p>
 
 
