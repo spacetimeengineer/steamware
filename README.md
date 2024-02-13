@@ -1,7 +1,9 @@
 What is steamware?
 ==================
 
-Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family (much like legos) and the software utilities which generate them. **steamware** aims to make a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. Additionally research and development is generally expected to be faster. These parts are hyper modular and carry infinite permutations which can be designed and generated on the fly. Also **steamware** has a very useful property where the configurations can be visually discerned, encoded, measured and calculated.
+Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). Also **steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! This saves alot of time.
+
+
 
 
 
@@ -55,7 +57,9 @@ You may sell this steamware any way you see fit! I am here to support all commer
 The **ts** variable is the track string. Each character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and express garenteed modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit have garenteed modular poroperties. The translation instruction characters are *X, Y, Z, A, B, C* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space at basis unit steps. It can change scale by 1/3 or 3 depending on the scale modifyer instruction  characters: U, D
 
 
-
+Examples
+========
+**WARNING** All numerical values are unitless stricly speaking. This is becasue open scad operates this way. Phyical units of distance are applied afterwards with things like slicers. For this reason we say that millimeters are assumed but if you are working with inches you must reassign fit padding especially.
 
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
