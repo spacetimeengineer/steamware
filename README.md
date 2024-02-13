@@ -51,7 +51,10 @@ Steamware is geometry, not material ofcourse unless you are talking 3D printing 
 
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="600"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="600" alt="This is a block unit and is roughly the size of the basis unit but minus some padding." />
+</p>
+<p align="center">
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="600"/>
+<em align="center">This is a block unit and is roughly the size of the basis unit but minus some padding.</em>
 </p>
 
 **fp** : Fit Padding
