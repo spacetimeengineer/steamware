@@ -49,8 +49,10 @@ Steamware is geometry, not material ofcourse unless you are talking 3D printing 
 ===============
 **bu** makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and hieght of each block unit within the STEAMWare coordinate system. Basis-units are not physical, they are the frame in which track strings define a STEAMWare element. The block units themselves are physical and derive from basis units but are slightly smaller due to the padding which is subtracted however a coupler mesh is applied for every character in a track string so that said padding wont undermine binding intentions. It is important to note that binding is not ensured becasue blocks are adjacent. Binding is only applied for each character in the track string. 
 
+<p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="600"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0D.png#gh-dark-mode-only" width="600"/>
+</p>
 
 **fp** : Fit Padding
 ==============
@@ -63,19 +65,27 @@ The **ts** variable is the track string. Each character in the track string repr
 
 
 
-
+<p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="500"/>
+</p>
+
 
     $ python3 sw.py --fn example_part --bu 10 --fp 0.134 --ts XXDXXX
 
+
+<p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1D.png#gh-dark-mode-only" width="600"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1L.png#gh-light-mode-only" width="600"/>
+</p>
 
     $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
 
+
+<p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2D.png#gh-dark-mode-only" width="625"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="625"/>
+</p>
 
     $ python3 sw.py --fn cross --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
