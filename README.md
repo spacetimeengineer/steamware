@@ -1,6 +1,6 @@
 *Note from the author*
 
-STEAMWare is a potent technology built for reasons difficult to explain. It can be very useful.
+Steamware is a potent technology. 
 
 
 
@@ -20,6 +20,25 @@ LEGO provides parts that they manufacturte and it is not legal to manufacture LE
 **steamware** provides infinite parts and all with garenteed modular properties.
 
 **steamware** is a python s ript which builds openSCAD files that point to parts.
+
+How does Steameare work?
+=======================
+This steamware.py script generates openscad code.
+
+Why was it built?
+=================
+There were a multitude of reasons behind steamware. Check out my mupy library. steamware was built as an optimized part library after spending a while on that library.
+
+Recursion Binding
+=================
+
+No Illegal Operations
+=====================
+Steamware was made to be useful and maliable. The holes wer designed fro bolts and pins but strings and wires are ok too! Even the steamware itself is material independent.
+
+Material Independence
+=====================
+Steamware is geometry, not material ofcourse unless you are talking 3D printing material but thats the point! many new filiments are becoming available as time move on. 3D printing is a quickly growing field.
 
 
 **fn** : File Name(s)
@@ -45,8 +64,8 @@ The **ts** variable is the track string. Each character in the track string repr
 
 
 
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="600"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="500"/>
 
     $ python3 sw.py --fn example_part --bu 10 --fp 0.134 --ts XXDXXX
 
@@ -55,8 +74,8 @@ The **ts** variable is the track string. Each character in the track string repr
 
     $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
 
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2D.png#gh-dark-mode-only" width="600"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2D.png#gh-dark-mode-only" width="625"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="625"/>
 
     $ python3 sw.py --fn cross --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
