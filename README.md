@@ -1,6 +1,6 @@
 *Note from the author*
 
-Steamware is a potent technology. 
+Steamware is a potent technology. If you dont know what to print, print steamware.
 
 
 
@@ -8,18 +8,19 @@ Steamware is a potent technology.
 What is STEAMWare?
 ==================
 
-**steamware** refers to an open source modular part family and the software utilities which generates them. STEAMWare aims to make a fully open source baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope of the author that this style of manufacturing will overwhelm traditional manufacturing schools of thought. These parts are hyper modular and carry infinite permutations wehich can be designed and generated on the fly. **steamware** has a very useful property where the configurations can be visually discerned or mentally encoded. This makes labeling with an infinite permutation set a non-issue.
+**steamware** refers to an open source modular part family (much like legos) and the software utilities which generate them. **steamware** aims to make a fully open source baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope is that this style of manufacturing will act as a catalyst and overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations which can be designed and generated on the fly. **steamware** has a very useful property where the configurations can be visually discerned or mentally encoded, measured and calculated. This makes labeling a non-requirement which is powerful.
 
-You may think of **steamware** as in many ways similar to the LEGO company except a few key differences.
+You may think of **steamware** as xa digital free part supply house where the parts are modular and infinite and really cool.
 
 **steamware** is not a company but a repository which provides free parts. The only cost is the material for 3D prining or otherwise and the energy needeed to make it. The desing and labeling component is taken care of from the outset.
-
-LEGO provides parts that they manufacturte and it is not legal to manufacture LEGOs yourself and it in any event is not appreciated by the LEGO company.
 
 
 **steamware** provides infinite parts and all with garenteed modular properties.
 
-**steamware** is a python s ript which builds openSCAD files that point to parts.
+
+**steamware** is a python script which builds openSCAD files that point to parts.
+
+
 
 How does Steameare work?
 =======================
