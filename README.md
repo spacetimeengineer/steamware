@@ -71,7 +71,7 @@ The **ts** variable is the track string. Each character in the track string repr
 </p>
 
 
-    $ python3 sw.py --fn example_part --bu 10 --fp 0.134 --ts XXDXXX
+    $ python3 steamware.py --fn example_part --bu 10 --fp 0.134 --ts XXDXXX
 
 
 <p align="center">
@@ -79,7 +79,7 @@ The **ts** variable is the track string. Each character in the track string repr
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1L.png#gh-light-mode-only" width="600"/>
 </p>
 
-    $ python3 sw.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
+    $ python3 steamware.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
 
 
 <p align="center">
@@ -87,7 +87,7 @@ The **ts** variable is the track string. Each character in the track string repr
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="625"/>
 </p>
 
-    $ python3 sw.py --fn cross --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
+    $ python3 steamware.py --fn cross --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
 
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
@@ -96,7 +96,8 @@ Each Call creates an .scad file, .stl file and a a .png file of the same filenam
 FUTURE OF STEAMWARE
 ===================
 - Power Transmission
-    - Gears (modular)
-    - Gearboxes (modular)
+    - Gears (modular) / Snap In
+    - Gearboxes (modular) / Snap In
 - Computer Housing
     - Housing track string constructor algorithms.
+- 3D Printed Bearings / Embedded in steamware
