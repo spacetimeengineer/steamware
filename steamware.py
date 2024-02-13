@@ -964,11 +964,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     #-db DATABASE -u USERNAME -p PASSWORD -size 20
-    parser.add_argument("--fn", "--filenames", help="File Names", type=str)
+    parser.add_argument("--ed", "--export_directory", help="File Names", type=str)
     parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float)
     parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float)
     parser.add_argument("--ts", "--track_string", help="Track String", type=str)
 
     args = parser.parse_args()
 
-    CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
+    CUBX2000("RYANSOL-CUBX2000-BU"+args.bu+"S0P14MO-"+args.ts+"-SCAD22", "/home/mryan")

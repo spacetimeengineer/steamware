@@ -1,28 +1,12 @@
-*Note from the author*
-
-Steamware is a potent technology. If you dont know what to print, print steamware.
-
-
-
-
-What is STEAMWare?
+What is steamware?
 ==================
 
-**steamware** refers to an open source modular part family (much like legos) and the software utilities which generate them. **steamware** aims to make a fully open source baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope is that this style of manufacturing will act as a catalyst and overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations which can be designed and generated on the fly. **steamware** has a very useful property where the configurations can be visually discerned or mentally encoded, measured and calculated. This makes labeling a non-requirement which is powerful.
-
-You may think of **steamware** as xa digital free part supply house where the parts are modular and infinite and really cool.
-
-**steamware** is not a company but a repository which provides free parts. The only cost is the material for 3D prining or otherwise and the energy needeed to make it. The desing and labeling component is taken care of from the outset.
-
-
-**steamware** provides infinite parts and all with garenteed modular properties.
-
-
-**steamware** is a python script which builds openSCAD files that point to parts.
+Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family (much like legos) and the software utilities which generate them. **steamware** aims to make a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. Additionally research and development is generally expected to be faster. These parts are hyper modular and carry infinite permutations which can be designed and generated on the fly. Also **steamware** has a very useful property where the configurations can be visually discerned, encoded, measured and calculated.
 
 
 
-How does Steameare work?
+
+How does steamware work?
 =======================
 This steamware.py script generates openscad code.
 
@@ -32,15 +16,19 @@ There were a multitude of reasons behind steamware. Check out my mupy library. s
 
 Recursion Binding
 =================
+Steamware is fractal like and basis unit centric and this affects the way steamware approaches physical binding or joining of multiple elements. The shafts will often provide space for a basis unit 1/3 the size to fid. 
 
 No Illegal Operations
 =====================
-Steamware was made to be useful and maliable. The holes wer designed fro bolts and pins but strings and wires are ok too! Even the steamware itself is material independent.
+Steamware was made to be utility grade, maliable, cheap and recreational. The square holes were designed to act as bolt shafts or shafts for other steamware of lower basis units. If one looks close enough all steamware currently is built from basis unit blocks with fit padding applied.
 
 Material Independence
 =====================
-Steamware is geometry, not material ofcourse unless you are talking 3D printing material but thats the point! many new filiments are becoming available as time move on. 3D printing is a quickly growing field.
+Steamware is a geometry, not a material (ofcourse unless you are talking 3D printing material but thats the point!) many new filiments are becoming available as time move on anyhow. 3D printing is a quickly growing field.
 
+Can I make money off steamware?
+===============================
+You may sell this steamware any way you see fit! I am here to support all commerce! I am also interested in what people can create.
 
 **fn** : File Name(s)
 =================
@@ -73,7 +61,7 @@ The **ts** variable is the track string. Each character in the track string repr
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="500"/>
 <em>image_caption</em>
-</p>
+</p>fro bolts and pins but strings and wires are ok too! Even the steamware itself is material independent.
 
 
     $ python3 steamware.py --fn example_part --bu 10 --fp 0.134 --ts XXDXXX
@@ -106,3 +94,12 @@ FUTURE OF STEAMWARE
 - Computer Housing
     - Housing track string constructor algorithms.
 - 3D Printed Bearings / Embedded in steamware
+- Linkage Schemes
+- Make robotics more acessible generally.
+
+STEAMWARE GOALS
+===============
+Low density space robots
+Atomic Computers
+Wind energy circuts.
+Modular space stations.
