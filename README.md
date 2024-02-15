@@ -1,37 +1,36 @@
-What is steamware?
+## What is steamware?
 ==================
 
 Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, deconstructability, manufactuing, maintnence quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). Also **steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! This saves alot of time.
 
 
 
-How does steamware work?
-=======================
+### How does steamware work?
+
 This steamware.py script generates openscad code.
 
-Why was it built?
+### Why was it built?
 =================
 There were a multitude of reasons behind steamware. Check out my mupy library. steamware was built as an optimized part library after spending a while on that library.
 
-Recursion Binding
+ ### Recursion Binding
 =================
 Steamware is fractal like and basis unit centric and this affects the way steamware approaches physical binding or joining of multiple elements. The shafts will often provide space for a basis unit 1/3 the size to fid. 
 
-No Illegal Operations
+### No Illegal Operations
 =====================
 Steamware was made to be utility grade, maliable, cheap and recreational. The square holes were designed to act as bolt shafts or shafts for other steamware of lower basis units. If one looks close enough all steamware currently is built from basis unit blocks with fit padding applied.
 
-Material Independence
+### Material Independence
 =====================
 Steamware is a geometry, not a material (ofcourse unless you are talking 3D printing material but thats the point!) many new filiments are becoming available as time move on anyhow. 3D printing is a quickly growing field.
 
-Can I make money off steamware?
+### Can I make money off steamware?
 ===============================
 You may sell this steamware any way you see fit! I am here to support all commerce! I am also interested in what people can create.
 
 
-**bu** : Basis Unit
-===============
+## **bu** : Basis Unit
 **bu** makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and hieght of each block unit within the **steamware** coordinate system assuming a scale modiier instruction was applied which would yield a basis unit as three times greater or one third the size. Basis-units are not physical, they are the frame in which a track-string defines a **steamware** element. The *block units* themselves are physical and derive from **basis units** but are slightly smaller due to the **fit-padding** which is subtracted however upon transitions, a coupler mesh is applied for every spatial transition instruction character in a track string so that the padding wont interfere with binding intentions. It is important to note that binding is not ensured becasue blocks are adjacent, only if there is a track string.
 
 
@@ -51,16 +50,15 @@ When you run steamware.py nothing particularly interesting happens and the gener
 The basis unit defaults to 10 which is *assumed* to millimeters becasue slicing software ultimatly determines this so check your slicing configurations. Also openscad whjich this tech is built on is relies on unitless measures of space. The fit padding (~0.139) is the only clue that millimetrs were intended since in inches the fit padding would be less optimized.
 
     $ python3 steamware.py --en example_part --ed /home/mryan/Documents/steamware
+ 
+## **fp** : Fit Padding
 
-**fp** : Fit Padding
-==============
 **fp** is the total amount of distance subtracted from a basis unit per block for the exterior profile and the interior shaft. Without a fit-padding it would be extrememly dificult to bind objects together, especially within a narrow shaft. The fit padding is a variable and must be set by the user to suit thier needs. A recomended starting point is a fp = 0.139 (mm) and shift from thier but this particular value is tride and tru and is set as default if not specified by user. 
 
-**ts** : Track String
-==============
+## **ts** : Track String
 The **ts** variable is the track string. Each character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and express garenteed modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit have garenteed modular poroperties. The translation instruction characters are *X, Y, Z, A, B, C* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space at basis unit steps. It can change scale by 1/3 or 3 depending on the scale modifyer instruction  characters: U, D
 
-track characters
+### Track Characters
 ================
 
 
@@ -94,19 +92,19 @@ track characters
 
 
 
-**it** : Initial Type
+## **it** : Initial Type
 Defaults to 'O' for open which is identical to the diagram above. 'P' is protected which is hollow but covered; for this track-string acts like a pipe extention function. 'F' is for filled and it is not hollow at all. In this case filled just means that open scad interprets a solid object. **WARNING:** The slicer may print at whastever density it wants. 
 
-**en** : Export Name
-====================
+## **en** : Export Name
+
 **en** is the baseline-name for the files which will be generated without specifying the extentions. They will be placed inside a directory of the same name which will be written to the **export-directory** Any generated files will have this name plus whatever extension the file requires. If left blank, **en** defaults to unnamed_steamware_<n>.
 
-**ep** : Export Path
-====================
+## **ep** : Export Path
+
 **ep** is the path where the export will be writen too; <export_path>+'/'+<export_name> upon execution of **steamware.py**. If left blank, **ep** defaults to the current path.
 
-Examples
-========
+## Examples
+
 **WARNING** All numerical values are unitless stricly speaking. This is becasue open scad operates this way. Phyical units of distance are applied afterwards with things like slicers. For this reason we say that millimeters are assumed but if you are working with inches you must reassign fit padding especially.
 
 <p align="center">
@@ -138,8 +136,7 @@ Examples
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
 
 
-FUTURE OF STEAMWARE
-===================
+### FUTURE OF STEAMWARE
 - Power Transmission
     - Gears (modular) / Snap In
     - Gearboxes (modular) / Snap In
@@ -149,8 +146,7 @@ FUTURE OF STEAMWARE
 - Linkage Schemes
 - Make robotics more acessible generally.
 
-STEAMWARE WISHLISTS
-===================
+### STEAMWARE WISHLISTS
 - Low density space robots
 - Atomic Computers
 - Wind energy circuts.
