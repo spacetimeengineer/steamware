@@ -1,8 +1,3 @@
-Note frome the author
-=====================
-I dont mean to sound korny but here we are... I have so many rthings I want to share when I think about wwhy I made steamware but it doesn t wreally matter.  It was always aqbout a catalyst for kindness. Nothing more. All other reasons pail in comparison to this one. We need to be better. I need to be better. I think we can build things if we work together. I think its the only way. Talking doesnt matter unless it reflects something real. We need to begin finding wways to solve problems. We nedd to be better. We need hiugh integrety. We need free. we need freedom to roam with no exceptions for all. We need tools to coordinate and work together and I assertt this is one. This is my offering so you know I am for real when say I am part of the solution. I ask for nothing more than you adknowledge this from me. I ask for your trust and one day mabye friendship. I am in this for the *adventure* and if you are like me and you seek *adventure* then help me. If you dont know what I am saying then you need to learn to read between the lines and look deeper. Nothing is what it seems.
-
-
 What is steamware?
 ==================
 
