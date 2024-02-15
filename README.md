@@ -1,32 +1,24 @@
 ## What is steamware?
-==================
-
 Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, deconstructability, manufactuing, maintnence quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). Also **steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! This saves alot of time.
 
 
 
 ### How does steamware work?
-
 This steamware.py script generates openscad code.
 
 ### Why was it built?
-=================
 There were a multitude of reasons behind steamware. Check out my mupy library. steamware was built as an optimized part library after spending a while on that library.
 
  ### Recursion Binding
-=================
 Steamware is fractal like and basis unit centric and this affects the way steamware approaches physical binding or joining of multiple elements. The shafts will often provide space for a basis unit 1/3 the size to fid. 
 
 ### No Illegal Operations
-=====================
 Steamware was made to be utility grade, maliable, cheap and recreational. The square holes were designed to act as bolt shafts or shafts for other steamware of lower basis units. If one looks close enough all steamware currently is built from basis unit blocks with fit padding applied.
 
 ### Material Independence
-=====================
 Steamware is a geometry, not a material (ofcourse unless you are talking 3D printing material but thats the point!) many new filiments are becoming available as time move on anyhow. 3D printing is a quickly growing field.
 
 ### Can I make money off steamware?
-===============================
 You may sell this steamware any way you see fit! I am here to support all commerce! I am also interested in what people can create.
 
 
@@ -59,9 +51,6 @@ The basis unit defaults to 10 which is *assumed* to millimeters becasue slicing 
 The **ts** variable is the track string. Each character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and express garenteed modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit have garenteed modular poroperties. The translation instruction characters are *X, Y, Z, A, B, C* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space at basis unit steps. It can change scale by 1/3 or 3 depending on the scale modifyer instruction  characters: U, D
 
 ### Track Characters
-================
-
-
 
 
 | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
