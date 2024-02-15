@@ -72,30 +72,30 @@ track characters
 
 
 | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
-| --- | --- | --- | --- |  ---  |
-|   A    |   X   |   X   |     X    |   X  |
-|   B    |   X   |   X   |    X     |   X  | 
-|   C   |      |      |         |     |  
-|       |      |     |   <p style="text-align: center;">D</p>       |     |
-|       |      |     |        |
-|       |      |        <p style="text-align: center;">F</p>   |        |    |
-|       |  <p style="text-align: center;">G</p>    |     |        |      |
-|       |      |      |        |        |
-|       |      |      |        |        |   
-|       |      |      |        |        |
-|       |      |      |        |        |
-|       |      |      |        |        |
-|       |      |      |    <p style="text-align: center;">M</p>     |   |        |
-|       |      |      |        |        |
-|       |      |   <p style="text-align: center;">O</p>   |        |        |
-|       |      |   <p style="text-align: center;">P</p>   |        |        |
-|       |      |      |        |        |       <p style="text-align: center;">T</p>     |
-|       |      |      |        |        |       <p style="text-align: center;">U</p>     |
-|       |      |      |        |        |       <p style="text-align: center;">V</p>     |
-|       |      |      |        |        |       <p style="text-align: center;">W</p>     |
-|   <p style="text-align: center;">X</p>    |      |      |         |        |
-|   <p style="text-align: center;">Y</p>    |      |      |         |        |
-|   <p style="text-align: center;">Z</p>    |      |      |         |        |
+| ------- | ------- | ------- | ------- | ------- |
+|    A    |         |         |         |         |
+|    B    |         |         |         |         |
+|    C    |         |         |         |         |
+|         |         |         |    D    |         |
+|         |         |         |         |         |
+|         |         |    F    |         |         |
+|         |    G    |         |         |         |
+|         |         |         |         |         |
+|         |         |         |         |         |   
+|         |         |         |         |         |
+|         |         |         |         |         |
+|         |         |         |         |         |
+|         |         |         |    M    |         | 
+|         |         |         |         |         |
+|         |         |    O    |         |         |
+|         |         |    P    |         |         |
+|         |         |         |         |    T    |
+|         |         |         |         |    U    |
+|         |         |         |         |    V    |
+|         |         |         |         |    W    |
+|    X    |         |         |         |         |
+|    Y    |         |         |         |         |
+|    Z    |         |         |         |         |
 
 
 
