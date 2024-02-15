@@ -71,75 +71,33 @@ track characters
 
 
 =============
-| Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions |
+| Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
 | --- | --- | --- | --- |
-|   A   |  A   |  C   |   D    |
-|   B   |  A   |  C   |   D    |
-|   C   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   A   |  A   |  C   |   D    |
-|   X   |  A   |  C   |   D    |
-|   Y   |  A   |  C   |   D    |
-|   Z   |  A   |  C   |   D    |
+|   <p style="text-align: center;">A</p>    |      |      |         |     |
+|   <p style="text-align: center;">B</p>    |      |      |         |     | 
+|   <p style="text-align: center;">C</p>    |      |      |         |     |  
+|       |      |     |   <p style="text-align: center;">D</p>       |     |
+|       |      |     |        |
+|       |      |        <p style="text-align: center;">F</p>   |        |    |
+|       |  <p style="text-align: center;">G</p>    |     |        |      |
+|       |      |      |        |        |
+|       |      |      |        |        |   
+|       |      |      |        |        |
+|       |      |      |        |        |
+|       |      |      |        |        |
+|       |      |      |    <p style="text-align: center;">M</p>     |   |        |
+|       |      |      |        |        |
+|       |      |   <p style="text-align: center;">O</p>   |        |        |
+|       |      |   <p style="text-align: center;">P</p>   |        |        |
+|       |      |      |        |        |       <p style="text-align: center;">T</p>     |
+|       |      |      |        |        |       <p style="text-align: center;">U</p>     |
+|       |      |      |        |        |       <p style="text-align: center;">V</p>     |
+|       |      |      |        |        |       <p style="text-align: center;">W</p>     |
+|   <p style="text-align: center;">X</p>    |      |      |         |        |
+|   <p style="text-align: center;">Y</p>    |      |      |         |        |
+|   <p style="text-align: center;">Z</p>    |      |      |         |        |
 
 
-
-
-A -                -X
-B -               - Y
-C -                -Z
-D                                                                            - Divide (unavailable)
-E - Unused
-F -                                         Filled
-G                                                      - Grow
-H -                                      -  
-I - Unused
-J - Unused
-K - Unused
-L - Unused
-M                                                                         - Multiply (unavailable)
-N - 
-O -                                      -  Opened
-P                                        - Protected
-Q - 
-R - Unused
-S                                                       - Shrink
-T - Styled
-U - Unstyled
-V - No Cliped Corners
-W - No clipped Edges
-X - X
-Y - Y
-Z - Z
-
-M - Multiply
-D - Divide
-G - Grow
-S - Shrink
-
-
-X
-Y
-Z
-
-Solid
-Open
-Shield
 
 **it** : Initial Type
 Defaults to 'O' for open which is identical to the diagram above. 'P' is protected which is hollow but covered; for this track-string acts like a pipe extention function. 'F' is for filled and it is not hollow at all. In this case filled just means that open scad interprets a solid object. **WARNING:** The slicer may print at whastever density it wants. 
