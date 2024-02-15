@@ -72,6 +72,7 @@ track characters
 
 =============
 | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions |
+| --- | --- | --- | --- |
 |   A   |  A   |  C   |   D    |
 |   B   |  A   |  C   |   D    |
 |   C   |  A   |  C   |   D    |
