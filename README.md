@@ -45,39 +45,45 @@ The basis unit defaults to 10 which is *assumed* to millimeters becasue slicing 
  
 ## **fp** : Fit Padding
 
-**fp** is the total amount of distance subtracted from a basis unit per block for the exterior profile and the interior shaft. Without a fit-padding it would be extrememly dificult to bind objects together, especially within a narrow shaft. The fit padding is a variable and must be set by the user to suit thier needs. A recomended starting point is a fp = 0.139 (mm) and shift from thier but this particular value is tride and tru and is set as default if not specified by user. 
+**fp** is the total amount of distance subtracted from a basis unit per block for the exterior profile and the interior shaft. Without a fit-padding it would be extrememly dificult to bind objects together, especially within a narrow shaft. The fit padding is a variable and must be set by the user to suit thier needs. A recomended starting point is a ***fp = 0.139 (mm)*** and shift from thier but this particular value is tride and tru and is set as default if not specified by user. Defaults to ***fp = 0.139 (mm)***. ***WARNING*** make sure your slicer is set to mm!
 
 ## **ts** : Track String
-The **ts** variable is the track string. Each character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and express garenteed modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit have garenteed modular poroperties. The translation instruction characters are *X, Y, Z, A, B, C* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space at basis unit steps. It can change scale by 1/3 or 3 depending on the scale modifyer instruction  characters: U, D
+The **ts** variable is the track string. Each transition character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and garentee modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit express modular poroperties. The translation instruction characters are *(X, Y, Z, A, B, C)* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space in basis unit steps. The basis unit can change scale by **1/3** or **3** along the track if the scale modifier instruction characters *'S'(Shrink)* or  *'G' (Grow)* are invoked respectively.
+
+
+
 
 ### Track Characters
 
 
-| Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
-| :-----: | :-----: | :-----: | :-----: | :-----: |
-|    A    |         |         |         |         |
-|    B    |         |         |         |         |
-|    C    |         |         |         |         |
-|         |         |         |    D    |         |
-|         |         |         |         |         |
-|         |         |    F    |         |         |
-|         |    G    |         |         |         |
-|         |         |         |         |         |
-|         |         |         |         |         |   
-|         |         |         |         |         |
-|         |         |         |         |         |
-|         |         |         |         |         |
-|         |         |         |    M    |         | 
-|         |         |         |         |         |
-|         |         |    O    |         |         |
-|         |         |    P    |         |         |
-|         |         |         |         |    T    |
-|         |         |         |         |    U    |
-|         |         |         |         |    V    |
-|         |         |         |         |    W    |
-|    X    |         |         |         |         |
-|    Y    |         |         |         |         |
-|    Z    |         |         |         |         |
+Letter | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
+| :-----: | :-------------------------: | :----------------: | :-------------: | :-----------: | :-----: |
+|    A    |    -x translation : 1 bu    |                    |                 |               |         |
+|    B    |    -y translation : 1 bu    |                    |                 |               |         |
+|    C    |    -z translation : 1 bu    |                    |                 |               |         |
+|    D    |                             |                    |                 |    divide     |         |
+|    E    |                             |                    |                 |               |         |
+|    F    |                             |                    |     filled      |               |         |
+|    G    |                             |   grow bu x 3      |                      |               |         |
+|    H    |                             |                    |                      |               |         |
+|    I    |                             |                    |                      |               |         |   
+|    J    |                             |                    |                      |               |         |
+|    K    |                             |                    |                      |               |         |
+|    L    |                             |                    |                      |               |         |
+|    M    |                             |                    |                      |    multiply   |         | 
+|    N    |                             |                    |                      |         |         |
+|    O    |                             |                    |       open      |         |         |
+|    P    |                             |                    |    protected    |         |         |
+|    Q    |                             |                    |                      |         |         |
+|    R    |                             |                    |         |         |         |
+|    S    |                             |  shrink bu ÷ 3     |         |         |         |
+|    T    |                             |                    |         |         |    T    |
+|    U    |                             |                    |         |         |    U    |
+|    V    |                             |                    |         |         |    V    |
+|    W    |                             |                    |         |         |    W    |
+|    X    |    x translation : 1 bu     |                    |         |         |         |
+|    Y    |    y translation : 1 bu     |                    |         |         |         |
+|    Z    |    z translation : 1 bu     |                    |         |         |         |
 
 
 
@@ -129,16 +135,18 @@ Each Call creates an .scad file, .stl file and a a .png file of the same filenam
 - Power Transmission
     - Gears (modular) / Snap In
     - Gearboxes (modular) / Snap In
-- Computer Housing
+- Computer Housing / General Housing
     - Housing track string constructor algorithms.
 - 3D Printed Bearings / Embedded in steamware
-- Linkage Schemes
+- Mechanical Linkage Schemes / New Genberation Scripts
 - Make robotics more acessible generally.
+- Integrate with mupy *POSSIBLY*
 
 ### STEAMWARE WISHLISTS
 - Low density space robots
 - Atomic Computers
 - Wind energy circuts.
+- Differential circuts.
 - Modular space stations.
 - More pull requests.
 - More parts available.
