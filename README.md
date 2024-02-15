@@ -67,6 +67,38 @@ The **ts** variable is the track string. Each character in the track string repr
 
 track characters
 ================
+
+
+
+=============
+| Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions |
+|   A   |  A   |  C   |   D    |
+|   B   |  A   |  C   |   D    |
+|   C   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   A   |  A   |  C   |   D    |
+|   X   |  A   |  C   |   D    |
+|   Y   |  A   |  C   |   D    |
+|   Z   |  A   |  C   |   D    |
+
+
+
+
 A -                -X
 B -               - Y
 C -                -Z
@@ -108,6 +140,9 @@ Solid
 Open
 Shield
 
+**it** : Initial Type
+Defaults to 'O' for open which is identical to the diagram above. 'P' is protected which is hollow but covered; for this track-string acts like a pipe extention function. 'F' is for filled and it is not hollow at all. In this case filled just means that open scad interprets a solid object. **WARNING:** The slicer may print at whastever density it wants. 
+
 **en** : Export Name
 ====================
 **en** is the baseline-name for the files which will be generated without specifying the extentions. They will be placed inside a directory of the same name which will be written to the **export-directory** Any generated files will have this name plus whatever extension the file requires. If left blank, **en** defaults to unnamed_steamware_<n>.
@@ -127,7 +162,7 @@ Examples
 </p>fro bolts and pins but strings and wires are ok too! Even the steamware itself is material independent.
 
 
-    $ python3 steamware.py --fn example_part --ed \home\mryan\steamware --bu 10 --fp 0.134 --it O --ts XXSXXX
+    $ python3 steamware.py --en example_part --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --it O --ts XXSXXX
 
 
 <p align="center">
