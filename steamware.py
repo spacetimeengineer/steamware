@@ -964,6 +964,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     #-db DATABASE -u USERNAME -p PASSWORD -size 20
+    parser.add_argument("--en", "--export_name", help="File Names", type=str)
     parser.add_argument("--ed", "--export_directory", help="File Names", type=str)
     parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float)
     parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float)
