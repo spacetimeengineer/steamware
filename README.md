@@ -34,18 +34,15 @@ Can I make money off steamware?
 ===============================
 You may sell this steamware any way you see fit! I am here to support all commerce! I am also interested in what people can create.
 
-**fn** : File Name(s)
-=================
-**fn** is the baseline-name for the files which will be generated without the extention. Any generated files will have this name plus whatever extension the file requires.
 
 **bu** : Basis Unit
 ===============
-**bu** makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and hieght of each block unit within the STEAMWare coordinate system. Basis-units are not physical, they are the frame in which track strings define a STEAMWare element. The block units themselves are physical and derive from basis units but are slightly smaller due to the padding which is subtracted however a coupler mesh is applied for every character in a track string so that said padding wont undermine binding intentions. It is important to note that binding is not ensured becasue blocks are adjacent. Binding is only applied for each character in the track string. 
+**bu** makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and hieght of each block unit within the **steamware** coordinate system assuming a scale modiier instruction was applied which would yield a basis unit as three times greater or one third the size. Basis-units are not physical, they are the frame in which a track-string defines a **steamware** element. The *block units* themselves are physical and derive from **basis units** but are slightly smaller due to the **fit-padding** which is subtracted however upon transitions, a coupler mesh is applied for every spatial transition instruction character in a track string so that the padding wont interfere with binding intentions. It is important to note that binding is not ensured becasue blocks are adjacent, only if there is a track string.
 
 
     $ python3 steamware.py
 
-When you run steamware.py nothing particularly interesting happens and the generated directory will be unnamed and place in the current directory of execution. All of the defaults are activated but with no track string entered by the user only a single basis unit block is available and it represents our primordial origin block.
+When you run steamware.py nothing particularly interesting happens and the generated directory will be unnamed and placed in the current directory of execution. All of the defaults are activated but with no track string entered by the user only a single basis unit block is available and it represents our primordial origin block.
 
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="600"/>
@@ -111,6 +108,13 @@ Solid
 Open
 Shield
 
+**en** : Export Name
+====================
+**en** is the baseline-name for the files which will be generated without specifying the extentions. They will be placed inside a directory of the same name which will be written to the **export-directory** Any generated files will have this name plus whatever extension the file requires. If left blank, **en** defaults to unnamed_steamware_<n>.
+
+**ep** : Export Path
+====================
+**ep** is the path where the export will be writen too; <export_path>+'/'+<export_name> upon execution of **steamware.py**. If left blank, **ep** defaults to the current path.
 
 Examples
 ========
