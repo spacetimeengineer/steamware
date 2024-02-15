@@ -73,9 +73,9 @@ track characters
 =============
 | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
 | --- | --- | --- | --- |
-|   <p style="text-align: center;">A</p>    |      |      |         |     |
-|   <p style="text-align: center;">B</p>    |      |      |         |     | 
-|   <p style="text-align: center;">C</p>    |      |      |         |     |  
+|   A    |   X   |   X   |     X    |   X  |
+|   B    |   X   |   X   |    X     |   X  | 
+|   C   |      |      |         |     |  
 |       |      |     |   <p style="text-align: center;">D</p>       |     |
 |       |      |     |        |
 |       |      |        <p style="text-align: center;">F</p>   |        |    |
