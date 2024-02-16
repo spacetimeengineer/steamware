@@ -1,12 +1,12 @@
-## What is steamware?
+### *What is steamware?*
 Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, deconstructability, manufactuing, maintnence quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). Also **steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! This saves alot of time.
 
 
 
-### How does steamware work?
+### *How does steamware work?*
 This steamware.py script generates openscad code.
 
-### Why was it built?
+### *Why was it built?*
 There were a multitude of reasons behind steamware. Check out my mupy library. steamware was built as an optimized part library after spending a while on that library.
 
  ### Recursion Binding
@@ -18,7 +18,7 @@ Steamware was made to be utility grade, maliable, cheap and recreational. The sq
 ### Material Independence
 Steamware is a geometry, not a material (ofcourse unless you are talking 3D printing material but thats the point!) many new filiments are becoming available as time move on anyhow. 3D printing is a quickly growing field.
 
-### Can I make money off steamware?
+### *Can I make money off steamware?*
 You may sell this steamware any way you see fit! I am here to support all commerce! I am also interested in what people can create.
 
 
@@ -48,7 +48,7 @@ The basis unit defaults to 10 which is *assumed* to millimeters becasue slicing 
 **fp** is the total amount of distance subtracted from a basis unit per block for the exterior profile and the interior shaft. Without a fit-padding it would be extrememly dificult to bind objects together, especially within a narrow shaft. The fit padding is a variable and must be set by the user to suit thier needs. A recomended starting point is a ***fp = 0.139 (mm)*** and shift from thier but this particular value is tride and tru and is set as default if not specified by user. Defaults to ***fp = 0.139 (mm)***. ***WARNING*** make sure your slicer is set to mm!
 
 ## **ts** : Track String
-The **ts** variable is the track string. Each transition character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and garentee modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit express modular poroperties. The translation instruction characters are *(X, Y, Z, A, B, C)* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space in basis unit steps. The basis unit can change scale by **1/3** or **3** along the track if the scale modifier instruction characters *'S'(Shrink)* or  *'G' (Grow)* are invoked respectively. Next we have style modification characters *(T, U, V, W)* which respectively map to four separate styles : *(fully cropped)* , *(uncropped)*, *(edges cropped / uncropped corners)* and *(cropped corners / uncropped edges)*.
+The **ts** variable is the track string. Each transition character in the track string represents a transition from a previous block. It is for this reason there is alwasys one assumed block at the origin that needs no track character. The track string acts as an instruction to build steamware elements and garentee modularity. Due to the discrete cubic nature, all blocks of an identical or mathematically related basis unit express modular poroperties. The translation instruction characters are *(X, Y, Z, A, B, C)* which map to translations in the *( X , Y , Z , -X , -Y , -Z )* directions of euclidian space in basis unit steps. The basis unit can change scale by **1/3** or **3** along the track if the scale modifier instruction characters *'S'(Shrink)* or  *'G' (Grow)* are invoked respectively. Next we have style modification characters *(T, U, V, W)* which respectively map to four separate styles : *(fully cropped)* , *(fully uncropped)*, *(edges cropped / uncropped corners)* and *(cropped corners / uncropped edges)*.
 
 
 
@@ -64,26 +64,26 @@ Letter | Spatial Transition Instructions  |  Scale Transform Instructions  |  Ty
 |    D    |                             |                    |                 |    divide     |         |
 |    E    |                             |                    |                 |               |         |
 |    F    |                             |                    |     filled      |               |         |
-|    G    |                             |   grow bu x 3      |                      |               |         |
-|    H    |                             |                    |                      |               |         |
-|    I    |                             |                    |                      |               |         |   
-|    J    |                             |                    |                      |               |         |
-|    K    |                             |                    |                      |               |         |
-|    L    |                             |                    |                      |               |         |
-|    M    |                             |                    |                      |    multiply   |         | 
-|    N    |                             |                    |                      |         |         |
-|    O    |                             |                    |       open      |         |         |
-|    P    |                             |                    |    protected    |         |         |
-|    Q    |                             |                    |                      |         |         |
-|    R    |                             |                    |         |         |         |
-|    S    |                             |  shrink bu ÷ 3     |         |         |         |
-|    T    |                             |                    |         |         |    T    |
-|    U    |                             |                    |         |         |    U    |
-|    V    |                             |                    |         |         |    V    |
-|    W    |                             |                    |         |         |    W    |
-|    X    |    x translation : 1 bu     |                    |         |         |         |
-|    Y    |    y translation : 1 bu     |                    |         |         |         |
-|    Z    |    z translation : 1 bu     |                    |         |         |         |
+|    G    |                             |   grow bu x 3      |                 |               |         |
+|    H    |                             |                    |                 |               |         |
+|    I    |                             |                    |                 |               |         |   
+|    J    |                             |                    |                 |               |         |
+|    K    |                             |                    |                 |               |         |
+|    L    |                             |                    |                 |               |         |
+|    M    |                             |                    |                 |    multiply   |         | 
+|    N    |                             |                    |                 |               |         |
+|    O    |                             |                    |       open      |               |         |
+|    P    |                             |                    |    protected    |               |         |
+|    Q    |                             |                    |                 |               |         |
+|    R    |                             |                    |                 |               |         |
+|    S    |                             |  shrink bu ÷ 3     |                 |               |         |
+|    T    |                             |                    |                 |               |      fully cropped     |
+|    U    |                             |                    |                 |               |     fully uncropped    |
+|    V    |                             |                    |                 |               |    (edges cropped / uncropped corners)    |
+|    W    |                             |                    |                 |               |    (cropped corners / uncropped edges)    |
+|    X    |    x translation : 1 bu     |                    |                 |               |         |
+|    Y    |    y translation : 1 bu     |                    |                 |               |         |
+|    Z    |    z translation : 1 bu     |                    |                 |               |         |
 
 
 
