@@ -56,12 +56,12 @@ The **ts** variable is the track string. Each transition character in the track 
 ### Track Characters
 
 
-Letter | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
+Track Character | Spatial Transition Instructions  |  Scale Transform Instructions  |  Type Modifier Instructions  |  Special Transform Instructions | Style Modifier Instruction |
 | :-----: | :-------------------------: | :----------------: | :-------------: | :-----------: | :-----: |
 |    A    |    -x translation : 1 bu    |                    |                 |               |         |
 |    B    |    -y translation : 1 bu    |                    |                 |               |         |
 |    C    |    -z translation : 1 bu    |                    |                 |               |         |
-|    D    |                             |                    |                 |    divide     |         |
+|    D    |                             |                    |                 |     divide*   |         |
 |    E    |                             |                    |                 |               |         |
 |    F    |                             |                    |     filled      |               |         |
 |    G    |                             |   grow bu x 3      |                 |               |         |
@@ -70,24 +70,24 @@ Letter | Spatial Transition Instructions  |  Scale Transform Instructions  |  Ty
 |    J    |                             |                    |                 |               |         |
 |    K    |                             |                    |                 |               |         |
 |    L    |                             |                    |                 |               |         |
-|    M    |                             |                    |                 |    multiply   |         | 
+|    M    |                             |                    |                 |    multiply*  |         | 
 |    N    |                             |                    |                 |               |         |
-|    O    |                             |                    |       open      |               |         |
+|    O    |                             |                    |      open       |               |         |
 |    P    |                             |                    |    protected    |               |         |
 |    Q    |                             |                    |                 |               |         |
 |    R    |                             |                    |                 |               |         |
 |    S    |                             |  shrink bu ÷ 3     |                 |               |         |
-|    T    |                             |                    |                 |               |      fully cropped     |
-|    U    |                             |                    |                 |               |     fully uncropped    |
-|    V    |                             |                    |                 |               |    (edges cropped / uncropped corners)    |
-|    W    |                             |                    |                 |               |    (cropped corners / uncropped edges)    |
+|    T    |                             |                    |                 |               |      fully cropped*     |
+|    U    |                             |                    |                 |               |     fully uncropped*    |
+|    V    |                             |                    |                 |               |    (edges cropped / uncropped corners)*    |
+|    W    |                             |                    |                 |               |    (cropped corners / uncropped edges)*    |
 |    X    |    x translation : 1 bu     |                    |                 |               |         |
 |    Y    |    y translation : 1 bu     |                    |                 |               |         |
 |    Z    |    z translation : 1 bu     |                    |                 |               |         |
 
 
 
-## **it** : Initial Type
+## **mt** : Mass Type
 Defaults to 'O' for open which is identical to the diagram above. 'P' is protected which is hollow but covered; for this track-string acts like a pipe extention function. 'F' is for filled and it is not hollow at all. In this case filled just means that open scad interprets a solid object. **WARNING:** The slicer may print at whastever density it wants. 
 
 ## **en** : Export Name

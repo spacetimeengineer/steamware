@@ -2,47 +2,78 @@
 import os, sys
 import shutil
 import argparse
+from loguru import logger
 
 
 
+class STEAMWare:
+    """ This class builds digital representations of STEAMWare elements."""
+    def __init__(self, basis_unit, fit_padding, track_string, mass_type, export_name, export_directory): # Runs when object is initialized.
 
-class CUBX2000:
-    """ This class builds digital representations of CUBX2000 hardware elements."""
-
-    def __init__(self, system_code, output_directory): # Runs when object is initialized.
-
-        self.system_code = system_code  # System code.
+        #self.system_code = system_code  # System code.
          
-        system_code_list = self.system_code.split("-") # separates simple   
+        #system_code_list = self.system_code.split("-") # separates simple   
          
-        self.VENDOR_CODE = system_code_list[0] # Vendor code.
-        self.WORK_CODE = system_code_list[1] # Work code.
-        self.ITEM_CODE = system_code_list[2] # Item code.
+        #self.VENDOR_CODE = system_code_list[0] # Vendor code.
+        #self.WORK_CODE = system_code_list[1] # Work code.
+        #self.ITEM_CODE = system_code_list[2] # Item code.
         
-        if len(system_code_list) == 5:
+        #if len(system_code_list) == 5:
+        #    
+        #    self.CONFIG_CODE = system_code_list[3]
+        #
+        #if len(system_code_list) == 4:
+        #    
+        #    self.CONFIG_CODE = ""
             
-            self.CONFIG_CODE = system_code_list[3]
-        
-        if len(system_code_list) == 4:
+        self.track_string = track_string # The string of configuration codes that are used to build the steamware element.    
             
-            self.CONFIG_CODE = ""
-            
-        self.PROTOCOL_CODE = system_code_list[len(system_code_list)-1] # Protocol code.
+        #self.PROTOCOL_CODE = system_code_list[len(system_code_list)-1] # Protocol code.
         
-        self.basis_unit = float(self.ITEM_CODE.split("BU")[1].split("S")[0]) # The units which blocks are measured in and the length of each alphabetic-translation.
-        self.padding = float(self.ITEM_CODE.split("S")[1].split("M")[0].replace("P",".")) # Shaft radius for each block.
+        self.basis_unit = basis_unit
+        self.fit_padding = fit_padding
         
+        #self.basis_unit = float(self.ITEM_CODE.split("BU")[1].split("S")[0]) # The units which blocks are measured in and the length of each alphabetic-translation.
+        #self.fit_padding = float(self.ITEM_CODE.split("S")[1].split("M")[0].replace("P",".")) # Shaft radius for each block.
         
-        self.mass_state = self.ITEM_CODE.split("M")[1]
-        
+        self.mass_type = mass_type # The initial type of mass state that the system is in.
+        #self.mass_type = self.ITEM_CODE.split("M")[1]
+        self.export_name = export_name # The name of the export file/directory.
                 
-        self.output_directory = output_directory # Directory where resources are delivered.
-        self.scad_file_name = output_directory + "/" + self.system_code +".scad" # The actual name of the scad file that is represented by the system code.
+        self.export_directory = export_directory # Directory where resources are delivered.
+        self.export_name = export_name # Name of the export file/directory.
         
+        
+        
+        self.steamware_element_directory = self.export_directory + "/" +  self.export_name # The directory where the steamware element is stored.
+        
+        
+        
+        if not os.path.exists(self.export_directory):
+            
+            logger.info("Creating export directory : " + self.export_directory )
+            
+            os.system("mkdir "+ self.export_directory)
+            
+        else:
+            
+            logger.info("Export directory : " + self.export_directory + " already exists." )
+            
+        if not os.path.exists(self.steamware_element_directory):
+            
+            logger.info("Creating steamware element directory : " + self.steamware_element_directory )
+            os.system("mkdir "+ self.steamware_element_directory) # Create steamware element directory.
+            
+        else:
+            
+            logger.info("Steamware element directory : " + self.steamware_element_directory + " already exists." )
+            
+            
+        self.scad_file_name = export_directory + "/" + export_name + "/" + export_name +".scad" # The actual name of the scad file that is represented by the system code.
         self.scad_file = open(self.scad_file_name, 'w+')  # open file in append mode
 
-        os.system("cp -R "+os.path.dirname(__file__)+"/scad/ "+ self.output_directory) # On Linux, copies from relevent scad libraries into 'output directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
-            
+
+        os.system("cp -R "+os.path.dirname(__file__)+"/scad/ "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
         self.scad_file.write('use <scad/CUBX2000.scad>;\n\n') # Write library usage. #TODO May need to be plugged in at the end.
             
 
@@ -52,24 +83,25 @@ class CUBX2000:
         self.delta_block_coordinates_tracker = [ 0, 0, 0 ]
         self.delta_coupler_coordinates_tracker = [ 0, 0, 0 ]
         
+        # TODO : Do stuff dependent on mass_type here with the origin block.
         
-        self.scad_file.write('translate( [ 0, 0, 0 ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+        self.scad_file.write('translate( [ 0, 0, 0 ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
 
         self.INSTRUCTION_SET = []
         
-        for i in list(self.CONFIG_CODE):
-            print(i)
+        for i in list(self.track_string):
+            
             if i == "S":
                 
-                self.mass_state = "S"
+                self.mass_type = "S"
             
             if i =="O":
                 
-                self.mass_state = "O"
+                self.mass_type = "O"
             
             if i != "S" and i != "O": 
                 
-                self.INSTRUCTION_SET.append([ i, self.mass_state ]) 
+                self.INSTRUCTION_SET.append([ i, self.mass_type ])  # This is where the instruction set is built.
 
         for i in range(len(self.INSTRUCTION_SET)):
 
@@ -110,7 +142,7 @@ class CUBX2000:
         self.previous_block_coordinates_tracker = self.block_coordinates_tracker    
         self.previous_coupler_coordinates_tracker = self.coupler_coordinates_tracker
         
-        self.mass_state = INSTRUCTION[1]
+        self.mass_type = INSTRUCTION[1]
         
         
         
@@ -149,15 +181,15 @@ class CUBX2000:
                     coy = self.coupler_orientation[1]
                     coz = self.coupler_orientation[2]
 
-                    if (self.mass_state == "O"):
+                    if (self.mass_type == "O"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_state == "S"):
+                    if (self.mass_type == "S"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
 
         if (INSTRUCTION[0] =="B"):
             
@@ -190,15 +222,15 @@ class CUBX2000:
                     coy = self.coupler_orientation[1]
                     coz = self.coupler_orientation[2]
 
-                    if (self.mass_state == "O"):
+                    if (self.mass_type == "O"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_state == "S"):
+                    if (self.mass_type == "S"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
         if (INSTRUCTION[0] =="C"):
             
@@ -231,15 +263,15 @@ class CUBX2000:
                     coy = self.coupler_orientation[1]
                     coz = self.coupler_orientation[2]
 
-                    if (self.mass_state == "O"):
+                    if (self.mass_type == "O"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_state == "S"):
+                    if (self.mass_type == "S"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                                 
                 
         if (INSTRUCTION[0] =="X"):
@@ -278,15 +310,15 @@ class CUBX2000:
                     coz = self.coupler_orientation[2]
 
                     
-                    if (self.mass_state == "O"):
+                    if (self.mass_type == "O"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_state == "S"):
+                    if (self.mass_type == "S"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')           
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')           
                 
 
             
@@ -321,15 +353,15 @@ class CUBX2000:
                     coy = self.coupler_orientation[1]
                     coz = self.coupler_orientation[2]
 
-                    if (self.mass_state == "O"):
+                    if (self.mass_type == "O"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_state == "S"):
+                    if (self.mass_type == "S"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                             
         if (INSTRUCTION[0] =="Z"):
             
@@ -363,15 +395,15 @@ class CUBX2000:
                     coy = self.coupler_orientation[1]
                     coz = self.coupler_orientation[2]
 
-                    if (self.mass_state == "O"):
+                    if (self.mass_type == "O"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_state == "S"):
+                    if (self.mass_type == "S"):
                         
-                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                        self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                        self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
 
                 
             
@@ -402,15 +434,15 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
                 self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ -self.basis_unit/2, 0, 0 ])))
@@ -430,13 +462,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
                 
             if NEXT_INSTRUCTION == "B":
@@ -458,15 +490,15 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
                 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
                 self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, -self.basis_unit/2, 0 ])))
@@ -486,13 +518,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
             if NEXT_INSTRUCTION == "C":
 
@@ -512,15 +544,15 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
                 self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, 0, -self.basis_unit/2 ])))
@@ -540,13 +572,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
                 
                 
@@ -574,15 +606,15 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
                 self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ self.basis_unit/2, 0, 0 ])))
@@ -602,13 +634,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
                 
             if NEXT_INSTRUCTION == "Y":
@@ -629,15 +661,15 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
                 self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, self.basis_unit/2, 0 ])))
@@ -657,13 +689,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
             if NEXT_INSTRUCTION == "Z":
 
@@ -683,15 +715,15 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
                 self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, 0, self.basis_unit/2 ])))
@@ -711,13 +743,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
                 
       
@@ -747,13 +779,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
             if NEXT_INSTRUCTION == "B":
@@ -776,13 +808,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
            
             
             if NEXT_INSTRUCTION == "C":
@@ -804,13 +836,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
                 
                 
@@ -833,13 +865,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
                 
             
@@ -865,13 +897,13 @@ class CUBX2000:
                 coz = self.coupler_orientation[2]
 
                 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
 
             
@@ -894,13 +926,13 @@ class CUBX2000:
                 coy = self.coupler_orientation[1]
                 coz = self.coupler_orientation[2]
 
-                if (self.mass_state == "O"):
+                if (self.mass_type == "O"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_state == "S"):
+                if (self.mass_type == "S"):
                     
-                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.padding)+' ); } }\n')
+                    self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
 
         self.coupler_orientation = [ 0, 0, 0 ]
@@ -964,12 +996,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
     #-db DATABASE -u USERNAME -p PASSWORD -size 20
-    parser.add_argument("--en", "--export_name", help="File Names", type=str)
-    parser.add_argument("--ed", "--export_directory", help="File Names", type=str)
+    parser.add_argument("--en", "--export_name", help="Export Name", type=str)
+    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str)
     parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float)
     parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float)
     parser.add_argument("--ts", "--track_string", help="Track String", type=str)
+    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str)
 
     args = parser.parse_args()
 
-    CUBX2000("RYANSOL-CUBX2000-BU"+args.bu+"S0P14MO-"+args.ts+"-SCAD22", "/home/mryan")
+    STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed)
