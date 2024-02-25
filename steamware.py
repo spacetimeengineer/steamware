@@ -943,6 +943,6 @@ if __name__ == "__main__":
     STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed) # Create a STEAMWare object with the basis unit, fit padding, track string, mass type, export name, and export directory arguments.
     
 """Examples:
-    # Windows: python steamware.py --en "test" --ed "C:/Users/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD" 
+    # Powershell: python steamware.py --en "test" --ed "C:/Users/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD" 
     # Linux: python steamware.py --en "test" --ed "/home/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD"
 """

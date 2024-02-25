@@ -103,15 +103,15 @@ Track Character | Spatial Transition Instructions  |  Scale Transform Instructio
 
 
 ## **mt** : Mass Type
-Defaults to 'O' for open which is identical to the diagram above. 'P' is protected which is hollow but covered; for this track-string acts like a pipe extension function. 'F' is for filled and it is not hollow at all. In this case filled just means that open scad interprets a solid object. **WARNING:** The slicer may print at whatever density it wants. 
+Defaults to 'O' for open which is identical to the diagram above. 'P' is protected which is hollow but covered; for this track-string acts like a pipe extension function. 'F' is for filled/full and it is not hollow at all. In this case filled just means that open scad interprets a solid object. **WARNING:** The slicer may print at whatever density the user sets it at. 
 
 ## **en** : Export Name
 
-**en** is the baseline-name for the files which will be generated without specifying the extensions. They will be placed inside a directory of the same name which will be written to the **export-directory** Any generated files will have this name plus whatever extension the file requires. If left blank, **en** defaults to unnamed_steamware_<n>.
+The **en** variable is the baseline-name for the files which will be generated without specifying the extensions. They will be placed inside a directory of the same name which will be written to the **export-directory** Any generated files will have this name plus whatever extension the file requires. If left blank, **en** defaults to unnamed_steamware_<n>.
 
-## **ep** : Export Path
+## **ed** : Export Directory
 
-**ep** is the path where the export will be writen too; <export_path>+'/'+<export_name> upon execution of **steamware.py**. If left blank, **ep** defaults to the current path.
+The **ed** variable is the path where the export will be writen too; <export_path>+'/'+<export_name> upon execution of **steamware.py**. If left blank, **ep** defaults to the current path.
 
 ## Examples
 
