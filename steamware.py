@@ -44,10 +44,7 @@ class STEAMWare:
         self.export_name = export_name # Name of the export file/directory.
         
         
-        
         self.steamware_element_directory = self.export_directory + "/" +  self.export_name # The directory where the steamware element is stored.
-        
-        
         
         if not os.path.exists(self.export_directory):
             
@@ -73,8 +70,8 @@ class STEAMWare:
         self.scad_file = open(self.scad_file_name, 'w+')  # open file in append mode
 
 
-        os.system("cp -R "+os.path.dirname(__file__)+"/CUBX2000.scad "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
-        self.scad_file.write('use <CUBX2000.scad>;\n\n') # Write library usage. #TODO May need to be plugged in at the end.
+        os.system("cp -R "+os.path.dirname(__file__)+"/steamware.scad "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
+        self.scad_file.write('use <steamware.scad>;\n\n') # Write library usage. #TODO May need to be plugged in at the end.
             
 
         self.block_coordinates_tracker = [ 0, 0, 0 ]    
