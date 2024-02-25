@@ -111,10 +111,13 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 
 **WARNING** All numerical values are unitless stricly speaking. This is becasue open scad operates this way. Phyical units of distance are applied afterwards with things like slicers. For this reason we say that millimeters are assumed but if you are working with inches you must reassign fit padding especially.
 
+
+### Example 1 : Just an example part
+
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="500"/>
-<em>image_caption</em>
+<em></em>
 </p>
 
 
@@ -126,7 +129,7 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 <em></em>
 </p>
 
-
+### Example 2 : A (strange) dougnut shape. 
 
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1D.png#gh-dark-mode-only" width="625"/>
@@ -141,6 +144,8 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-light-mode-only" width="1000"/>
 </p>
 
+### Example 3 : A cross-like shape. 
+
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2D.png#gh-dark-mode-only" width="625"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="625"/>
@@ -152,6 +157,8 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-dark-mode-only" width="1000"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-light-mode-only" width="1000"/>
 </p>
+
+
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
 
 
