@@ -109,7 +109,7 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 </p>fro bolts and pins but strings and wires are ok too! Even the steamware itself is material independent.
 
 
-    $ python3 steamware.py --en example_part --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --it O --ts XXSXXX
+    $ python3 steamware.py --en example_part --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --mt O --ts XXSXXX
 
 
 <p align="center">
@@ -117,7 +117,7 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1L.png#gh-light-mode-only" width="600"/>
 </p>
 
-    $ python3 steamware.py --fn donught --bu 10 --fp 0.134 --ts XXXBBAAAYY
+    $ python3 steamware.py -en dougnut --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --mt O --ts XXXBBAAAYY
 
 
 <p align="center">
@@ -125,7 +125,7 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="625"/>
 </p>
 
-    $ python3 steamware.py --fn cross --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
+    $ python3 steamware.py -en cross --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
 
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.

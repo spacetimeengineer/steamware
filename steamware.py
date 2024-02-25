@@ -73,8 +73,8 @@ class STEAMWare:
         self.scad_file = open(self.scad_file_name, 'w+')  # open file in append mode
 
 
-        os.system("cp -R "+os.path.dirname(__file__)+"/scad/ "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
-        self.scad_file.write('use <scad/CUBX2000.scad>;\n\n') # Write library usage. #TODO May need to be plugged in at the end.
+        os.system("cp -R "+os.path.dirname(__file__)+"/CUBX2000.scad "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
+        self.scad_file.write('use <CUBX2000.scad>;\n\n') # Write library usage. #TODO May need to be plugged in at the end.
             
 
         self.block_coordinates_tracker = [ 0, 0, 0 ]    
@@ -134,7 +134,7 @@ class STEAMWare:
         
         
         self.scad_file.close() # Finish writing scad script.
-        
+
 
     
     def transcribe_configuration(self, INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION):
@@ -945,52 +945,6 @@ class STEAMWare:
 
 
 if __name__ == "__main__":
-    
-    # System codes to remember :
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU5S0P12MO-XXXXXXX-SCAD22", "/home/mryan")
-    #CUBX2000("RYANSOL-CUBX2000-BU5S0P12MO-XXXXXXXYYYYYYY-SCAD22", "/home/mryan")
-    #CUBX2000("RYANSOL-CUBX2000-BU5S0P12MO-XXYYAABBXAZZXXCCZZYYCCZZAACCZZBBXA-SCAD22", "/home/mryan")
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXYYAA-SCAD22", "/home/mryan")
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXXYYAAA-SCAD22", "/home/mryan")
-
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXYYAABBXAZXXYYAABBXAZXXYYAABBXAZXXYYAABBXA-SCAD22", "/home/mryan")
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XYBBYXXYBBYXXYBBYXXYBBYX-SCAD22", "/home/mryan")
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-BXXYBXXYBXXYBXXABBXABBYAABYAABYAABYAAXYYAXYXXBBBXXXYYY-SCAD22", "/home/mryan") # RPI3MB+_SLEEVE_WRAP : 6BU X 10BU    
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-BXXYBXXYBXXYBXXABBXABBXABBXABBYAABYAABYAABYAABYAAXYYAXYYAXYYAXYYBXXBBBBBBBXXXXXYYYYYYYXXBBAAAAAAAAABBBXXXXXXXXXAAAAY-SCAD22", "/home/mryan/Desktop/RPI3_SLEEVE") # RPI3MB+_SLEEVE_WRAP : 12BU X 10BU    
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-BXXYBXXYBXXYBXXYBXXABBXABBYAABYAABYAABYAABYAAXYYAXYXXBBBXXYBXXXYYY-SCAD22", "/home/mryan/Desktop/RPI3_SLEEVE") # RPI3MB+_SLEEVE_WRAP : 6BU X 10BU    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXYYAABBXAZZXYZCYBAXXABXCCZZYYCCZZAACCZZBBXXCC XXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAX-SCAD22", "/home/mryan/Desktop/print_set_jan_6_2023_chunk_improved")
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXYYAABBXAZZXYZCYBAXXABXCCZZYYCCZZAACCZZBBXXCC XXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXCCXX XXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXCCXX-SCAD22", "/home/mryan/Desktop/print_set_jan_6_2023_chunk_improved")
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXYYAABBXAZZXYZCYBAXXABXCCZZYYCCZZAACCZZBBXXCCXXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXXXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXXXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXXXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAX-SCAD22", "/home/mryan/Desktop/print_set_jan_6_2023_chunk_improved")
-
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P135MO-XXYYAABBXAZZXYZCYBAXXABXCCZZYYCCZZAACCZZBBXXCC XXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXCCXX XXXYYAAAXBAXBZAXZAXXYZCYBAXXABXCCZZYYCCZZAAAXCAXCAXZZBAXBAXCCXX-SCAD22", "/home/mryan/Desktop/print_set_jan_6_2023_chunk_improved")
-  
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXXYYYYZZZZAAXXBBYYCCZZ-SCAD22", "/home/mryan")
-    
-    # Create an instance of the CUBX2000 class with a complex "truck-like" track string
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXXYYYYZZZZUUAAAXXBBYYCCZZDDXXXXYYYYZZZZUUAAAXXBBYYCCZZDDXXXXYYYYZZZZUUAAAXXBBYYCCZZDDXXXXYYYYZZZZUUAAAXXBBYYCCZZDD-SCAD22", "/home/mryan")
-    # Create an instance of the CUBX2000 class with a complex "truck-like" track string
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXXYYYYZZZZUUXYZZAAXYZZBBXYZZCCXYZZDDXYZZUUXYZZAAXYZZBBXYZZCCXYZZDDXYZZUUXYZZAAXYZZBBXYZZCCXYZZDDXYZZUUXYZZAAXYZZBBXYZZCCXYZZDDXYZZ-SCAD22", "/home/mryan")
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
-    
-    #CUBX2000("RYANSOL-CUBX2000-BU10S0P14MO-XXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZXXXYYYZZZAAXBBXCCZ-SCAD22", "/home/mryan")
-    
-    # q: Make a new track of a 4x4x4 cube with a 1x1x1 cube in the center.      
-    # q: Make a new track of a 4x4x4 cube with a 1x1x1 cube in the center.
-    # q: Make a new track of a 4x4x4 cube with a 1x1x1 cube in the center.                                                          
-    # q: Make a new track of a 4x4x4 cube with a 1x1x1 cube in the center.
-    
-    
-    #q: Make 
     
     
     parser = argparse.ArgumentParser()
