@@ -1,25 +1,31 @@
 ### *What is steamware?*
-Lets be clear from the start, steamware is fun and cool, they are toys, tools and utilities all at the same time. Now that we have that covered lets talk serious becasue this is a serious technology. Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, deconstructability, manufactuing, maintnence quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). Also **steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! This saves alot of time.
+Lets be clear from the start, steamware is fun and cool, they are toys, tools and utilities all at the same time. Now that we have that covered lets talk serious becasue this is a serious technology. Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, deconstructability, manufactuing, maintnence quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). 
 
+
+
+
+
+### *Self-Evidence Element Identity*
+**Steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! Infact parts can be designed or imagined in your head.
 
 
 ### *How does steamware work?*
-This steamware.py script generates openscad code.
+This steamware.py script generates openscad code, .stl renderings, images and metadata so the user has the resources to modify, showcase or manufacture the steamware element.
 
 ### *Why was it built?*
-There were a multitude of reasons behind steamware. Check out my mupy library. steamware was built as an optimized part library after spending a while on that library.
+There were alot of reasons behind steamware. Lets just say it was well thought out.
 
  ### Recursion Binding
-Steamware is fractal like and basis unit centric and this affects the way steamware approaches physical binding or joining of multiple elements. The shafts will often provide space for a basis unit 1/3 the size to fid. 
+Steamware is fractal like and basis unit centric and this affects the way steamware approaches physical binding or joining of multiple elements. The shafts will often provide space for a basis unit 1/3 the size to fit. 
 
 ### No Illegal Operations
-Steamware was made to be utility grade, maliable, cheap and recreational. The square holes were designed to act as bolt shafts or shafts for other steamware of lower basis units. If one looks close enough all steamware currently is built from basis unit blocks with fit padding applied.
+Steamware was made to be utility grade, maliable, cheap and recreational. The square holes were designed to act as bolt shafts or shafts for other steamware of lower basis units or whatever... If one looks close enough all steamware is built from basis unit blocks with fit padding applied.
 
 ### Material Independence
 Steamware is a geometry, not a material (ofcourse unless you are talking 3D printing material but thats the point!) many new filiments are becoming available as time move on anyhow. 3D printing is a quickly growing field.
 
 ### *Can I make money off steamware?*
-You may sell this steamware any way you see fit! I am here to support all commerce! I am also interested in what people can create.
+Sure! but your better off adding your own flavor to it. It is about creation and steamware is just step in the right direction. I am here to support all commerce! I am also interested in what people can create!
 
 
 ## **bu** : Basis Unit
