@@ -6,16 +6,15 @@ Lets be clear from the start, steamware is fun and cool, they are toys, tools an
 
 
 ### *Self-Evidence Element Identity*
-**Steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! Infact parts can be designed or imagined in your head.
-
+**Steamware** posesses an extremely useful property known as identity-self-evidence where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! Infact parts can be designed or imagined in your head and on the fly.
 
 ### *How does steamware work?*
 This steamware.py script generates openscad code, .stl renderings, images and metadata so the user has the resources to modify, showcase or manufacture the steamware element.
 
 ### *Why was it built?*
-There were alot of reasons behind steamware. Lets just say it was well thought out.
+I thought it would be good for kids. In some part it was a cost-reduction play. An ode to open source. There were alot of reasons behind steamware but when the track string concept clicked I thought it was worth building.
 
- ### Recursion Binding
+ ### Super Binding
 Steamware is fractal like and basis unit centric and this affects the way steamware approaches physical binding or joining of multiple elements. The shafts will often provide space for a basis unit 1/3 the size to fit. 
 
 ### No Illegal Operations
@@ -69,7 +68,7 @@ Track Character | Spatial Transition Instructions  |  Scale Transform Instructio
 |    C    |    -z translation : 1 bu    |                    |                 |               |         |
 |    D    |                             |                    |                 |     divide*   |         |
 |    E    |                             |                    |                 |               |         |
-|    F    |                             |                    |     filled      |               |         |
+|    F    |                             |                    |     filled(Currently 'S')      |               |         |
 |    G    |                             |   grow bu x 3      |                 |               |         |
 |    H    |                             |                    |                 |               |         |
 |    I    |                             |                    |                 |               |         |   
