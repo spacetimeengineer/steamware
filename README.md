@@ -1,8 +1,12 @@
+
+
 ### *What is steamware?*
 Lets be clear from the start, steamware is fun and cool, they are toys, tools and utilities all at the same time. Now that we have that covered lets talk serious becasue this is a serious technology. Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, deconstructability, manufactuing, maintnence quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). 
 
 
-
+<p align="center">
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/steamware_picture_0.jpg" width="300"/>
+</p>
 
 
 ### *Self-Evidence Element Identity*
