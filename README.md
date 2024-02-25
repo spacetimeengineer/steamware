@@ -121,9 +121,9 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
     $ python3 steamware.py --en example_part --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXSXXX
 
 <p align="center">
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/example_part.png#gh-dark-mode-only" width="500"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/example_part.png#gh-light-mode-only" width="500"/>
-<em>image_caption</em>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/example_part.png#gh-dark-mode-only" width="1000"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/example_part.png#gh-light-mode-only" width="1000"/>
+<em></em>
 </p>
 
 
@@ -137,8 +137,8 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 
 
 <p align="center">
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-dark-mode-only" width="600"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-light-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-dark-mode-only" width="1000"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-light-mode-only" width="1000"/>
 </p>
 
 <p align="center">
@@ -149,8 +149,8 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
     $ python3 steamware.py --en cross --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
 <p align="center">
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-dark-mode-only" width="600"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-light-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-dark-mode-only" width="1000"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-light-mode-only" width="1000"/>
 </p>
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
 
