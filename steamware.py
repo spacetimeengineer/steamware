@@ -66,13 +66,13 @@ class STEAMWare:
         self.delta_block_coordinates_tracker = [ 0, 0, 0 ] # The delta coordinates of the block that is being tracked.
         self.delta_coupler_coordinates_tracker = [ 0, 0, 0 ] # The delta coordinates of the coupler that is being tracked.
         
-        if (self.mass_type == "O"):
+        if (self.mass_type == "O"): # If the mass type is "O" (Open).
                     
-            self.scad_file.write('translate( [ 0, 0, 0 ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
+            self.scad_file.write('translate( [ 0, 0, 0 ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n') # Write (Open) origin block to scad file.
                     
-        if (self.mass_type == "F"):
+        if (self.mass_type == "F"): # If the mass type is "F" (Full/Filled).
                     
-            self.scad_file.write('translate( [ 0, 0, 0 ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
+            self.scad_file.write('translate( [ 0, 0, 0 ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n') # Write (Filled/Full) origin block to scad file.
         
 
         self.INSTRUCTION_SET = []
@@ -138,18 +138,18 @@ class STEAMWare:
         
         if (INSTRUCTION[0] =="A"):
             
-            if (PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "G"):
                 
                 pass
             
             else:
                 
-                if (NEXT_INSTRUCTION == "D"):
+                if (NEXT_INSTRUCTION == "S"):
                     
                     pass
                     
                 
-                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "D"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
+                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "S"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
                     
                     
                     self.coupler_orientation = [ 0, 0, 0 ]
@@ -180,18 +180,18 @@ class STEAMWare:
 
         if (INSTRUCTION[0] =="B"):
             
-            if (PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "G"):
                 
                 pass
             
             else:
                     
-                if (NEXT_INSTRUCTION == "D"):
+                if (NEXT_INSTRUCTION == "S"):
                     
                     pass
                     
                 
-                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "D"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
+                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "S"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
                         
                     self.coupler_orientation = [ 0, 0, -90]
                     self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, -self.basis_unit/2, 0 ])))
@@ -221,18 +221,18 @@ class STEAMWare:
                 
         if (INSTRUCTION[0] =="C"):
             
-            if (PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "G"):
                 
                 pass
             
             else:
                     
-                if (NEXT_INSTRUCTION == "D"):
+                if (NEXT_INSTRUCTION == "S"):
                     
                     pass
                     
                 
-                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "D"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
+                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "S"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
                     
                     self.coupler_orientation = [ 0, -90, 0]
                     self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, 0, -self.basis_unit/2 ])))
@@ -264,20 +264,20 @@ class STEAMWare:
         if (INSTRUCTION[0] =="X"):
             
             
-            if (PREVIOUS_INSTRUCTION == "U"): # if (PREVIOUS_INSTRUCTION == "U" or (PREVIOUS_INSTRUCTION == "F" or PREVIOUS_INSTRUCTION == "O") and PREVIOUS_PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "G"): # if (PREVIOUS_INSTRUCTION == "G" or (PREVIOUS_INSTRUCTION == "F" or PREVIOUS_INSTRUCTION == "O") and PREVIOUS_PREVIOUS_INSTRUCTION == "G"):
                 
                 pass
             
             else:
             
-                if (NEXT_INSTRUCTION == "D"):
+                if (NEXT_INSTRUCTION == "S"):
                     
                     pass
                     
 
                     
                     
-                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "D"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
+                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "S"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
                     
                     self.coupler_orientation = [ 0, 0, 0 ]
                     self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ self.basis_unit/2, 0, 0 ])))
@@ -311,18 +311,18 @@ class STEAMWare:
             
         if (INSTRUCTION[0] =="Y"):
             
-            if (PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "G"):
                 
                 pass
             
             else:
                     
-                if (NEXT_INSTRUCTION == "D"):
+                if (NEXT_INSTRUCTION == "S"):
                     
                     pass
                     
                     
-                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "D"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
+                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "S"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
                     
                     self.coupler_orientation = [ 0, 0, 90]
                     self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, self.basis_unit/2, 0 ])))
@@ -352,18 +352,18 @@ class STEAMWare:
                             
         if (INSTRUCTION[0] =="Z"):
             
-            if (PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "G"):
                 
                 pass
             
             else:        
                     
-                if (NEXT_INSTRUCTION == "D"):
+                if (NEXT_INSTRUCTION == "S"):
                     
                     pass
                     
                 
-                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "D"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
+                if ((NEXT_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z"] or PREVIOUS_INSTRUCTION in ["A", "B", "C", "X", "Y", "Z", "S"]) or (NEXT_INSTRUCTION == None and PREVIOUS_INSTRUCTION == None)):
                     
                     self.coupler_orientation = [ 0, 90, 0]
                     self.coupler_coordinates_tracker = list(map(sum, zip(self.block_coordinates_tracker,[ 0, 0, self.basis_unit/2 ])))
@@ -402,7 +402,7 @@ class STEAMWare:
             
                     
         
-        if (INSTRUCTION[0] == "U"):
+        if (INSTRUCTION[0] == "G"):
             
             if NEXT_INSTRUCTION == "A":
 
@@ -743,7 +743,7 @@ class STEAMWare:
                 
                 
                 
-        if (INSTRUCTION[0] =="D"):
+        if (INSTRUCTION[0] =="S"):
             
                 
             if NEXT_INSTRUCTION == "A":

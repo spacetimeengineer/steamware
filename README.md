@@ -115,28 +115,36 @@ Defaults to 'O' for open which is identical to the diagram above. 'P' is protect
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0D.png#gh-dark-mode-only" width="500"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_0L.png#gh-light-mode-only" width="500"/>
 <em>image_caption</em>
-</p>fro bolts and pins but strings and wires are ok too! Even the steamware itself is material independent.
+</p>
 
 
-    $ python3 steamware.py --en example_part --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --mt O --ts XXSXXX
+    $ python3 steamware.py --en example_part --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXSXXX
+
+<p align="center">
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/example_part.png#gh-dark-mode-only" width="500"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/example_part.png#gh-light-mode-only" width="500"/>
+<em>image_caption</em>
+</p>
 
 
 <p align="center">
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1D.png#gh-dark-mode-only" width="600"/>
-<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_1L.png#gh-light-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-dark-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/dougnut.png#gh-light-mode-only" width="600"/>
 </p>
 
-    $ python3 steamware.py -en dougnut --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --mt O --ts XXXBBAAAYY
-
+    $ python3 steamware.py --en dougnut --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXXBBAAAYY
 
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2D.png#gh-dark-mode-only" width="625"/>
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/instruction_example_2L.png#gh-light-mode-only" width="625"/>
 </p>
 
-    $ python3 steamware.py -en cross --ep \home\mryan\Documents\steamware --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
+    $ python3 steamware.py --en cross --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 
-
+<p align="center">
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-dark-mode-only" width="600"/>
+<img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/cross.png#gh-light-mode-only" width="600"/>
+</p>
 Each Call creates an .scad file, .stl file and a a .png file of the same filename.
 
 
