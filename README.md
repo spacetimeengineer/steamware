@@ -1,7 +1,13 @@
 **WARNING** : Steamware is about ready to go. There are some features that are not in yet (marked by a *) but its working good. You will happy with what we got so far I think. README.md for now is trash but this isn't my day job. Script is stable as far as I can tell but you could break it if you tried. Just a script not a library yet but check it out if you want. 
 
+**WARNING** Never 3D print with supports!
+
+**WARNING** Assume millimeters but all numbers are unit-less. Slicers determine units generally.!
+
+
+
 ### *What is steamware?*
-Lets be clear from the start, **Steamware is fun and cool, they are toys, tools and utilities all at the same time!** Now that we have that covered lets talk serious because this is a serious technology. Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like Legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. steamware is very potent in particular in terms of a creation, constructability, de-constructability, manufacturing, maintenance quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). 
+Lets be clear from the start, **Steamware is fun and cool, they are toys, tools and utilities all at the same time!** Now that we have that covered lets talk serious because this is a serious technology. Science-technology-engineering-art-mathematics ware; (**steamware**) refers to an open source modular part family or hardware assembly language (much like Legos) and the software utilities which generate them. **steamware** aims to become a fully open source defacto baseline solution for high integrity-hardware generation for 3D print or otherwise. **Steamware** is very potent in particular in terms of a creation, constructability, de-constructability, manufacturing, maintenance quotient. The hope is that this style of manufacturing will act as a catalyst to overwhelm traditional manufacturing schools of thought and will reveal decentralized manufactured a more serious approach in the arena of manufacturing. These parts are hyper modular and carry infinite permutations that can be imagined, designed and generated on the fly (in seconds!). 
 
 
 <p align="center">
