@@ -10,60 +10,39 @@ class STEAMWare:
     """ This class builds digital representations of STEAMWare elements."""
     def __init__(self, basis_unit, fit_padding, track_string, mass_type, export_name, export_directory): # Runs when object is initialized.
 
-        #self.system_code = system_code  # System code.
-         
-        #system_code_list = self.system_code.split("-") # separates simple   
-         
-        #self.VENDOR_CODE = system_code_list[0] # Vendor code.
-        #self.WORK_CODE = system_code_list[1] # Work code.
-        #self.ITEM_CODE = system_code_list[2] # Item code.
-        
-        #if len(system_code_list) == 5:
-        #    
-        #    self.CONFIG_CODE = system_code_list[3]
-        #
-        #if len(system_code_list) == 4:
-        #    
-        #    self.CONFIG_CODE = ""
-            
         self.track_string = track_string # The string of configuration codes that are used to build the steamware element.    
             
-        #self.PROTOCOL_CODE = system_code_list[len(system_code_list)-1] # Protocol code.
         
-        self.basis_unit = basis_unit
-        self.fit_padding = fit_padding
+        self.basis_unit = basis_unit # The initial basis unit that the steamware element is built on.
+        self.fit_padding = fit_padding # The initial fit padding that the system is built on.
         
-        #self.basis_unit = float(self.ITEM_CODE.split("BU")[1].split("S")[0]) # The units which blocks are measured in and the length of each alphabetic-translation.
-        #self.fit_padding = float(self.ITEM_CODE.split("S")[1].split("M")[0].replace("P",".")) # Shaft radius for each block.
-        
+       
         self.mass_type = mass_type # The initial type of mass state that the system is in.
-        #self.mass_type = self.ITEM_CODE.split("M")[1]
-        self.export_name = export_name # The name of the export file/directory.
-                
+        if mass_type is None: # If no mass type is given, the system defaults to "O" (Open).
+            mass_type = "O" # Default mass type is "O" (Open).
+                            
         self.export_directory = export_directory # Directory where resources are delivered.
         self.export_name = export_name # Name of the export file/directory.
         
-        
         self.steamware_element_directory = self.export_directory + "/" +  self.export_name # The directory where the steamware element is stored.
-        
         if not os.path.exists(self.export_directory):
             
-            logger.info("Creating export directory : " + self.export_directory )
+            logger.info("Creating export directory : " + self.export_directory ) # Log export directory creation.   
             
-            os.system("mkdir "+ self.export_directory)
+            os.system("mkdir "+ self.export_directory) # Create export directory.
             
-        else:
+        else: # If export directory already exists.
             
-            logger.info("Export directory : " + self.export_directory + " already exists." )
+            logger.info("Export directory : " + self.export_directory + " already exists." ) # Log export directory already exists.
             
-        if not os.path.exists(self.steamware_element_directory):
+        if not os.path.exists(self.steamware_element_directory): # If steamware element directory does not exist.
             
-            logger.info("Creating steamware element directory : " + self.steamware_element_directory )
+            logger.info("Creating steamware element directory : " + self.steamware_element_directory ) # Log steamware element directory creation.
             os.system("mkdir "+ self.steamware_element_directory) # Create steamware element directory.
             
-        else:
+        else: # If steamware element directory already exists.
             
-            logger.info("Steamware element directory : " + self.steamware_element_directory + " already exists." )
+            logger.info("Steamware element directory : " + self.steamware_element_directory + " already exists." ) # Log steamware element directory already exists.
             
             
         self.scad_file_name = export_directory + "/" + export_name + "/" + export_name +".scad" # The actual name of the scad file that is represented by the system code.
@@ -71,71 +50,82 @@ class STEAMWare:
 
 
         os.system("cp -R "+os.path.dirname(__file__)+"/steamware.scad "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
+        self.scad_file.write('\n\n// STEAMWare Export Name: '+str(self.export_name)+'\n') # Write export name to scad file.
+        self.scad_file.write('// STEAMWare Export Directory: '+str(self.export_directory)+'\n') # Write export directory to scad file.
+        self.scad_file.write('// STEAMWare Track String Identity: '+str(self.track_string)+'\n\n') # Write track string identity to scad file.
+        self.scad_file.write('// Initial Basis Unit : '+str(self.basis_unit)+'\n') # Write basis unit to scad file.
+        self.scad_file.write('// Fit Padding : '+str(self.fit_padding)+'\n') # Write fit padding to scad file.
+        self.scad_file.write('// Initial Mass Type: '+str(self.mass_type)+'\n\n\n') # Write mass type to scad file.
+        
         self.scad_file.write('use <steamware.scad>;\n\n') # Write library usage. #TODO May need to be plugged in at the end.
             
 
-        self.block_coordinates_tracker = [ 0, 0, 0 ]    
-        self.coupler_coordinates_tracker = [ 0, 0, 0 ]
-        self.coupler_orientation = [ 0, 0, 0 ]
-        self.delta_block_coordinates_tracker = [ 0, 0, 0 ]
-        self.delta_coupler_coordinates_tracker = [ 0, 0, 0 ]
+        self.block_coordinates_tracker = [ 0, 0, 0 ] # The coordinates of the block that is being tracked.
+        self.coupler_coordinates_tracker = [ 0, 0, 0 ] # The coordinates of the coupler that is being tracked.
+        self.coupler_orientation = [ 0, 0, 0 ] # The orientation of the coupler that is being tracked.1
+        self.delta_block_coordinates_tracker = [ 0, 0, 0 ] # The delta coordinates of the block that is being tracked.
+        self.delta_coupler_coordinates_tracker = [ 0, 0, 0 ] # The delta coordinates of the coupler that is being tracked.
         
-        # TODO : Do stuff dependent on mass_type here with the origin block.
+        if (self.mass_type == "O"):
+                    
+            self.scad_file.write('translate( [ 0, 0, 0 ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
+                    
+        if (self.mass_type == "F"):
+                    
+            self.scad_file.write('translate( [ 0, 0, 0 ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
         
-        self.scad_file.write('translate( [ 0, 0, 0 ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
 
         self.INSTRUCTION_SET = []
         
         for i in list(self.track_string):
             
-            if i == "S":
+            if i == "F": # If the mass type is "F" (Full/Filled).
                 
-                self.mass_type = "S"
+                self.mass_type = "F" # Set the mass type to "F" (Full/Filled).
             
-            if i =="O":
+            if i =="O": # If the mass type is "O" (Open).
                 
-                self.mass_type = "O"
+                self.mass_type = "O" # Set the mass type to "O" (Open).
             
-            if i != "S" and i != "O": 
+            if i != "F" and i != "O":  # If the mass type is not "F" (Full/Filled) or "O" (Open).
                 
                 self.INSTRUCTION_SET.append([ i, self.mass_type ])  # This is where the instruction set is built.
 
-        for i in range(len(self.INSTRUCTION_SET)):
+        for i in range(len(self.INSTRUCTION_SET)): # For each element in the instruction set ; track string identity.
 
-            INSTRUCTION = self.INSTRUCTION_SET[i]
+            INSTRUCTION = self.INSTRUCTION_SET[i] # Get the instruction.
             
             if i != len(self.INSTRUCTION_SET)-1: # If not the last element.
                 
-                NEXT_INSTRUCTION = self.INSTRUCTION_SET[i+1][0]
+                NEXT_INSTRUCTION = self.INSTRUCTION_SET[i+1][0] # Get the next instruction.
                 
-            else:
+            else: # If the last element of the instruction.
                 
-                NEXT_INSTRUCTION = None
+                NEXT_INSTRUCTION = None # If the last element.
                 
-            if i == 0:
+            if i == 0: # If the first element.
                     
-                PREVIOUS_INSTRUCTION = None
+                PREVIOUS_INSTRUCTION = None # If the first element.
                     
-            else:
+            else: # If not the first element.
                     
-                PREVIOUS_INSTRUCTION = self.INSTRUCTION_SET[i-1][0]
+                PREVIOUS_INSTRUCTION = self.INSTRUCTION_SET[i-1][0] # Get the previous instruction.
  
- 
- 
- 
-            self.transcribe_configuration(INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION) 
-                  
-
-                
-            
-        
+            self.transcribe_configuration(INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION) # Transcribe the configuration to the scad file.
         
         self.scad_file.close() # Finish writing scad script.
 
 
     
-    def transcribe_configuration(self, INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION):
+    def transcribe_configuration(self, INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION): # Transcribes the configuration to the scad file.
+        """Transcribes the configuration to the scad file.
 
+        Args:
+            INSTRUCTION (str): Current track string instruction being processed and interpreted.
+            NEXT_INSTRUCTION (str): Next track string instruction being processed and interpreted.
+            PREVIOUS_INSTRUCTION (str): Previous track string instruction being processed and interpreted.
+        """    
+    
         self.previous_block_coordinates_tracker = self.block_coordinates_tracker    
         self.previous_coupler_coordinates_tracker = self.coupler_coordinates_tracker
         
@@ -183,7 +173,7 @@ class STEAMWare:
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_type == "S"):
+                    if (self.mass_type == "F"):
                         
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
@@ -224,7 +214,7 @@ class STEAMWare:
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_type == "S"):
+                    if (self.mass_type == "F"):
                         
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
@@ -265,7 +255,7 @@ class STEAMWare:
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_type == "S"):
+                    if (self.mass_type == "F"):
                         
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
@@ -274,7 +264,7 @@ class STEAMWare:
         if (INSTRUCTION[0] =="X"):
             
             
-            if (PREVIOUS_INSTRUCTION == "U"): # if (PREVIOUS_INSTRUCTION == "U" or (PREVIOUS_INSTRUCTION == "S" or PREVIOUS_INSTRUCTION == "O") and PREVIOUS_PREVIOUS_INSTRUCTION == "U"):
+            if (PREVIOUS_INSTRUCTION == "U"): # if (PREVIOUS_INSTRUCTION == "U" or (PREVIOUS_INSTRUCTION == "F" or PREVIOUS_INSTRUCTION == "O") and PREVIOUS_PREVIOUS_INSTRUCTION == "U"):
                 
                 pass
             
@@ -312,7 +302,7 @@ class STEAMWare:
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_type == "S"):
+                    if (self.mass_type == "F"):
                         
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')           
@@ -355,7 +345,7 @@ class STEAMWare:
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_type == "S"):
+                    if (self.mass_type == "F"):
                         
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
@@ -397,7 +387,7 @@ class STEAMWare:
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                    if (self.mass_type == "S"):
+                    if (self.mass_type == "F"):
                         
                         self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                         self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
@@ -436,7 +426,7 @@ class STEAMWare:
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
@@ -463,7 +453,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
@@ -492,7 +482,7 @@ class STEAMWare:
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
@@ -519,7 +509,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
@@ -546,7 +536,7 @@ class STEAMWare:
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
@@ -573,7 +563,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
@@ -608,7 +598,7 @@ class STEAMWare:
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
@@ -635,7 +625,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
@@ -663,7 +653,7 @@ class STEAMWare:
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
@@ -690,7 +680,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
@@ -717,7 +707,7 @@ class STEAMWare:
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(cx)+', '+str(cy)+', '+str(cz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_optimized_coupler( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
@@ -744,7 +734,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                     
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { solid_optimized_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); }\n')
                 
@@ -780,7 +770,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
@@ -809,7 +799,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
            
@@ -837,7 +827,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
@@ -866,7 +856,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
@@ -898,7 +888,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
                 
@@ -927,7 +917,7 @@ class STEAMWare:
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
-                if (self.mass_type == "S"):
+                if (self.mass_type == "F"):
                     
                     self.scad_file.write('translate( [ '+str(bx)+', '+str(by)+', '+str(bz)+' ] ) { rotate ( [ '+str(cox)+', '+str(coy)+', '+str(coz)+' ] ) { solid_transform_block( '+str(self.basis_unit)+' , '+str(self.fit_padding)+' ); } }\n')
 
@@ -937,23 +927,22 @@ class STEAMWare:
 
             
             
+if __name__ == "__main__": 
 
-
-
-
-if __name__ == "__main__":
+    """ Main Program """
     
+    parser = argparse.ArgumentParser() # Create Argument Parser Object
+    parser.add_argument("--en", "--export_name", help="Export Name", type=str) # Add the export name argument which is a string that descrribes the name of the file/directory to be exported.
+    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str) # Add the export directory argument which is a string that describes the directory where the file/directory will be exported.   
+    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float) # Add the basis unit argument which is a float that describes the basis unit of the block.
+    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float) # Add the fit padding argument which is a float that describes the fit padding of the block.
+    parser.add_argument("--ts", "--track_string", help="Track String", type=str) # Add the track string argument which is a string that describes the track string of the block.
+    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str) # Add the mass type argument which is a string that describes the mass type of the initial block(s).
+    args = parser.parse_args() # Parse the arguments and store them in the args variable.
+
+    STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed) # Create a STEAMWare object with the basis unit, fit padding, track string, mass type, export name, and export directory arguments.
     
-    parser = argparse.ArgumentParser()
-
-    #-db DATABASE -u USERNAME -p PASSWORD -size 20
-    parser.add_argument("--en", "--export_name", help="Export Name", type=str)
-    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str)
-    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float)
-    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float)
-    parser.add_argument("--ts", "--track_string", help="Track String", type=str)
-    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str)
-
-    args = parser.parse_args()
-
-    STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed)
+"""Examples:
+    # Windows: python steamware.py --en "test" --ed "C:/Users/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD" 
+    # Linux: python steamware.py --en "test" --ed "/home/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD"
+"""
