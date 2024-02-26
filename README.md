@@ -37,6 +37,17 @@ Steamware is a geometry, not a material so we are limited to what 3D printers or
 Sure! but your better off adding your own flavor to it. It is about creation and steamware is just step in the right direction. I am here to support all commerce! I am also interested in what people can create!
 
 
+## Installation :
+
+The steamware.py script can run without any dependencies but the scripts which it generates do require an an openscad instance to view/render/photograph Steamware.
+
+On Linux :
+
+    $ sudo apt-get install openscad
+
+If you are using Windows or MacOS go to :  https://openscad.org/downloads.html
+
+
 ## **bu** : Basis Unit
 **bu** makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and hieght of each block unit within the **steamware** coordinate system assuming a scale modiier instruction was applied which would yield a basis unit as three times greater or one third the size. Basis-units are not physical, they are the frame in which a track-string defines a **steamware** element. The *block units* themselves are physical and derive from **basis units** but are slightly smaller due to the **fit-padding** which is subtracted however upon transitions, a coupler mesh is applied for every spatial transition instruction character in a track string so that the padding wont interfere with binding intentions. It is important to note that binding is not ensured because blocks are adjacent, only if there is a track string.
 
