@@ -52,10 +52,6 @@ If you are using Windows or MacOS go to :  https://openscad.org/downloads.html
 The **bu** variable makes reference to the 'basis-unit' and essentially defines the initial scale of the part within the track string. Specifically it makes reference to the length, width and height of each block unit within the **steamware** coordinate system assuming a scale modiier instruction was applied which would yield a basis unit as three times greater or one third the size. Basis-units are not physical, they are the frame in which a track-string defines a **steamware** element. The *block units* themselves are physical and derive from **basis units** but are slightly smaller due to the **fit-padding** which is subtracted however upon transitions, a coupler mesh is applied for every spatial transition instruction character in a track string so that the padding wont interfere with binding intentions. It is important to note that binding is not ensured because blocks are adjacent, only if there is a track string.
 
 
-    $ python3 steamware.py
-
-When you run steamware.py nothing particularly interesting happens and the generated directory will be unnamed and placed in the current directory of execution. All of the defaults are activated but with no track string entered by the user only a single basis unit block is available and it represents our primordial origin block.
-
 <p align="center">
 <img src="https://github.com/spacetimeengineer/STEAMWare/blob/main/resources/legend_0L.png#gh-light-mode-only" width="600"/>
 </p>
@@ -67,7 +63,6 @@ When you run steamware.py nothing particularly interesting happens and the gener
 
 The basis unit defaults to 10 which is *assumed* to millimeters because slicing software ultimately determines this so check your slicing configurations. Also *openscad* which this tech is built on is relies on unit-less measures of space. The fit padding (~0.139) is the only clue that millimeters were intended since in inches the fit padding would be less optimized.
 
-    $ python3 steamware.py --en example_part --ed /home/user/Documents/Steamware
  
 ## **fp** : Fit Padding
 
