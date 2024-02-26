@@ -176,7 +176,7 @@ The **ed** variable is the path where the export will be writen too; <export_pat
 </p>
 
 
-Each Call creates an .scad file, .stl file and a a .png file of the same filename.
+Each Call creates an .scad file, .stl file* and a a .png* file of the same filename.
 
 
 ### FUTURE OF STEAMWARE
