@@ -1,4 +1,4 @@
-**WARNING** : Steamware is about ready to go. There are some features that are not in yet (marked by a *) but its working good. You will happy with what we got so far I think. This entire repo needs work including the README.md but this isn't my day job and the parts themselves are stable. Script is stable as far as I can tell but you could break it if you tried. Just a script not a library yet but check it out if you want. 
+**WARNING** : Steamware is about ready to go. There are some features that are not in yet (marked by a *) but its working good. You will happy with what we got so far I think. This entire repo needs work including the README.md but this isn't my day job and the parts themselves are stable. Script is not stable and you could break it if you tried. Just follow the instrructions and you will do ok. 
 
 **WARNING** Never 3D print with supports!
 
