@@ -19,7 +19,7 @@ Lets be clear from the start, **Steamware is fun and cool, they are toys, tools 
 This steamware.py script generates openscad code, .stl renderings, images and metadata so the user has the resources to modify, showcase or manufacture the steamware element.
 
 ### *Why was it built?*
-I thought it would be good for kids. In some part it was a cost-reduction play. An ode to open source. Something about data compression I think and OOOOooo robots and wind energy once the gears are built into steamware. Housing and spaceships and a replacement for cardboard. Also check out the mupy library if you really want to know how nuts I am. There were a lot of reasons behind Steamware. Maybe you can help find new ones.
+I thought it would be good for kids. In some part it was a cost-reduction play. An ode to open source. Something about data compression, robots and wind energy once the gears are built into steamware. Housing and spaceships and a replacement for cardboard. Yada yada yada. Also check out the mupy library if you really want to know how nuts I am. There were a lot of reasons behind Steamware. Maybe you can help find new ones.
 
 ### Self-Evident Identity*
 **Steamware** possesses an extremely useful property known as self-evident-identity where the configurations can be visually discerned, encoded, measured and calculated. No need for bar codes or labels! In fact parts can be designed or imagined in your head and on the fly.
