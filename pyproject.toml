@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "steamware"
+version = "0.1.0"
+description = "A modular part family and hardware assembly language for 3D printing."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Your Name", email = "your_email@example.com" }
+]
+homepage = "https://github.com/spacetimeengineer/STEAMWare"
+requires-python = ">=3.9"
+
+[project.dependencies]
+loguru = "*"
+
+[tool.setuptools.packages.find]
+where = ["steamware"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests"]

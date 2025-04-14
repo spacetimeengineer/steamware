@@ -1,0 +1,50 @@
+# Python-related files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+*.venv
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Pipenv environment files
+Pipfile
+Pipfile.lock
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+env/
+venv/
+
+# macOS system files
+.DS_Store
+
+# Linux system files
+*.swp
+*.swo
+
+# OpenSCAD files
+*.scad
+*.stl
+*.png
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.old
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Export directories
+/directory/where/files/are/exported/
