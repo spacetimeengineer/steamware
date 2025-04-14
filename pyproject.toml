@@ -9,7 +9,7 @@ description = "A modular part family and hardware assembly language for 3D print
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Your Name", email = "your_email@example.com" }
+    { name = "Michael C Ryan", email = "spacetime.engineer@gmail.com" }
 ]
 homepage = "https://github.com/spacetimeengineer/STEAMWare"
 requires-python = ">=3.9"
