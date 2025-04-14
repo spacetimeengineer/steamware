@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+
+
 import os, sys
 import shutil
 import argparse
@@ -927,22 +929,20 @@ class STEAMWare:
 
             
             
-if __name__ == "__main__": 
+def main():
+    """Main entry point for the Steamware CLI."""
+    parser = argparse.ArgumentParser(description="Steamware CLI Tool")
+    parser.add_argument("--en", "--export_name", help="Export Name", type=str, required=True)
+    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str, required=True)
+    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float, required=True)
+    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float, required=True)
+    parser.add_argument("--ts", "--track_string", help="Track String", type=str, required=True)
+    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str, required=True)
+    args = parser.parse_args()
 
-    """ Main Program """
-    
-    parser = argparse.ArgumentParser() # Create Argument Parser Object
-    parser.add_argument("--en", "--export_name", help="Export Name", type=str) # Add the export name argument which is a string that descrribes the name of the file/directory to be exported.
-    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str) # Add the export directory argument which is a string that describes the directory where the file/directory will be exported.   
-    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float) # Add the basis unit argument which is a float that describes the basis unit of the block.
-    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float) # Add the fit padding argument which is a float that describes the fit padding of the block.
-    parser.add_argument("--ts", "--track_string", help="Track String", type=str) # Add the track string argument which is a string that describes the track string of the block.
-    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str) # Add the mass type argument which is a string that describes the mass type of the initial block(s).
-    args = parser.parse_args() # Parse the arguments and store them in the args variable.
+    # Create a STEAMWare object with the provided arguments
+    STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed)
 
-    STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed) # Create a STEAMWare object with the basis unit, fit padding, track string, mass type, export name, and export directory arguments.
-    
-"""Examples:
-    # Powershell: python steamware.py --en "test" --ed "C:/Users/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD" 
-    # Linux: python steamware.py --en "test" --ed "/home/JohnDoe/Desktop" --bu 10 --fp 0.1 --mt "O" --ts "UABCD"
-"""
+
+if __name__ == "__main__":
+    main()
