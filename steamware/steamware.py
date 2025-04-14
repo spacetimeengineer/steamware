@@ -931,13 +931,16 @@ class STEAMWare:
             
 def main():
     """Main entry point for the Steamware CLI."""
+def main():
+    """Main entry point for the Steamware CLI."""
     parser = argparse.ArgumentParser(description="Steamware CLI Tool")
-    parser.add_argument("--en", "--export_name", help="Export Name", type=str, required=True)
-    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str, required=True)
-    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float, required=True)
-    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float, required=True)
-    parser.add_argument("--ts", "--track_string", help="Track String", type=str, required=True)
-    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str, required=True)
+    parser.add_argument("--en", "--export_name", help="Export Name", type=str, default="default_export")
+    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str, default="./steamware_exports")
+    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float, default=10.0)
+    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float, default=0.134)
+    parser.add_argument("--ts", "--track_string", help="Track String", type=str, default="XXSXXX")
+    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str, default="O")
+    args = parser.parse_args()
     args = parser.parse_args()
 
     # Create a STEAMWare object with the provided arguments
