@@ -16,7 +16,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "steamware=steamware:main",
+            "steamware=steamware:main",  # Replace `main` with the actual function in your script
         ],
     },
     classifiers=[
@@ -24,5 +24,5 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.9",
 )
