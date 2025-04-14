@@ -193,7 +193,13 @@ The **ed** variable defines the path where exports are saved: `<export_path>/<ex
 </p>
 
 ```bash
-$ steamware --en example_part --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXSXXX
+$ steamware \
+    --en example_part \
+    --ed /directory/where/files/are/exported \
+    --bu 10 \
+    --fp 0.134 \
+    --mt O \
+    --ts XXSXXX
 ```
 
 <p align="center">
@@ -209,7 +215,13 @@ $ steamware --en example_part --ed /directory/where/files/are/exported --bu 10 -
 </p>
 
 ```bash
-$ steamware --en doughnut --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXXBBAAAYY
+$ steamware \
+    --en doughnut \
+    --ed /directory/where/files/are/exported \
+    --bu 10 \
+    --fp 0.134 \
+    --mt O \
+    --ts XXXBBAAAYY
 ```
 
 <p align="center">
@@ -225,7 +237,12 @@ $ steamware --en doughnut --ed /directory/where/files/are/exported --bu 10 --fp 
 </p>
 
 ```bash
-$ steamware --en cross --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
+$ steamware \
+    --en cross \
+    --ed /directory/where/files/are/exported \
+    --bu 10 \
+    --fp 0.134 \
+    --ts XXXXAAYYBBBB
 ```
 
 <p align="center">
