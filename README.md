@@ -193,7 +193,7 @@ The **ed** variable defines the path where exports are saved: `<export_path>/<ex
 </p>
 
 ```bash
-$ python3 steamware.py --en example_part --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXSXXX
+$ steamware --en example_part --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXSXXX
 ```
 
 <p align="center">
@@ -209,7 +209,7 @@ $ python3 steamware.py --en example_part --ed /directory/where/files/are/exporte
 </p>
 
 ```bash
-$ python3 steamware.py --en doughnut --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXXBBAAAYY
+$ steamware --en doughnut --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --mt O --ts XXXBBAAAYY
 ```
 
 <p align="center">
@@ -225,7 +225,7 @@ $ python3 steamware.py --en doughnut --ed /directory/where/files/are/exported --
 </p>
 
 ```bash
-$ python3 steamware.py --en cross --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
+$ steamware --en cross --ed /directory/where/files/are/exported --bu 10 --fp 0.134 --ts XXXXAAYYBBBB
 ```
 
 <p align="center">
@@ -234,29 +234,3 @@ $ python3 steamware.py --en cross --ed /directory/where/files/are/exported --bu 
 </p>
 
 Each command generates an `.scad` file, an `.stl` file, and a `.png` file with the specified filename.
-
----
-
-## Future of Steamware
-
-- Power transmission:
-    - Modular gears and gearboxes.
-- Housing:
-    - Algorithms for housing track string construction.
-- 3D-printed bearings embedded in Steamware.
-- Mechanical linkage schemes and next-generation scripts.
-- Increased accessibility for robotics.
-- Potential integration with MuPy.
-
-## Steamware Wishlist
-
-- Low-density space robots.
-- Atomic computers.
-- Wind energy circuits.
-- Differential circuits.
-- Modular space stations.
-- More pull requests and contributions.
-- Expanded part library.
-- More users creating businesses or operations with Steamware.
-- New frameworks for technology development.
-- Broader adoption and innovation.
