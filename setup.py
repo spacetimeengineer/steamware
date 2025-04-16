@@ -3,6 +3,7 @@ import os
 import sys
 
 def post_install():
+    
     """Ensure ~/.local/bin is in PATH for CLI access after installation."""
     user_bin = os.path.expanduser("~/.local/bin")
 
