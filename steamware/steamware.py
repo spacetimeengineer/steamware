@@ -931,21 +931,66 @@ class STEAMWare:
             
 def main():
     """Main entry point for the Steamware CLI."""
-def main():
-    """Main entry point for the Steamware CLI."""
-    parser = argparse.ArgumentParser(description="Steamware CLI Tool")
-    parser.add_argument("--en", "--export_name", help="Export Name", type=str, default="default_export")
-    parser.add_argument("--ed", "--export_directory", help="Export Directory", type=str, default="./steamware_exports")
-    parser.add_argument("--bu", "--basis_unit", help="Basis Unit", type=float, default=10.0)
-    parser.add_argument("--fp", "--fit_padding", help="Fit Padding", type=float, default=0.134)
-    parser.add_argument("--ts", "--track_string", help="Track String", type=str, default="XXSXXX")
-    parser.add_argument("--mt", "--mass_type", help="Mass Type", type=str, default="O")
-    args = parser.parse_args()
+    parser = argparse.ArgumentParser(
+        description=(
+            "Steamware CLI Tool\n\n"
+            "This tool generates digital representations of STEAMWare elements based on a track string. "
+            "It outputs OpenSCAD files for 3D printing and hardware assembly.\n\n"
+            "Examples:\n"
+            "  steamware --en my_export --ts XXSXXX\n"
+            "  steamware --en custom_name --ed ./custom_dir --bu 15 --fp 0.2 --ts ABCDEF --mt F\n\n"
+            "Arguments:\n"
+            "  --en, --export_name       Name of the export file/directory (required).\n"
+            "  --ts, --track_string      Track string to define the STEAMWare configuration (required).\n"
+            "  --ed, --export_directory  Directory to save the exported files (default: ./steamware_exports).\n"
+            "  --bu, --basis_unit        Basis unit size for the STEAMWare elements (default: 10.0).\n"
+            "  --fp, --fit_padding       Fit padding for the elements (default: 0.134).\n"
+            "  --mt, --mass_type         Mass type of the elements: 'O' (Open) or 'F' (Full) (default: O).\n"
+        ),
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+
+    parser.add_argument(
+        "--en", "--export_name",
+        help="Name of the export file/directory (required).",
+        type=str,
+        required=True
+    )
+    parser.add_argument(
+        "--ts", "--track_string",
+        help="Track string to define the STEAMWare configuration (required).",
+        type=str,
+        required=True
+    )
+    parser.add_argument(
+        "--ed", "--export_directory",
+        help="Directory to save the exported files (default: ./steamware_exports).",
+        type=str,
+        default="./steamware_exports"
+    )
+    parser.add_argument(
+        "--bu", "--basis_unit",
+        help="Basis unit size for the STEAMWare elements (default: 10.0).",
+        type=float,
+        default=10.0
+    )
+    parser.add_argument(
+        "--fp", "--fit_padding",
+        help="Fit padding for the elements (default: 0.134).",
+        type=float,
+        default=0.134
+    )
+    parser.add_argument(
+        "--mt", "--mass_type",
+        help="Mass type of the elements: 'O' (Open) or 'F' (Full) (default: O).",
+        type=str,
+        default="O"
+    )
+
     args = parser.parse_args()
 
     # Create a STEAMWare object with the provided arguments
     STEAMWare(args.bu, args.fp, args.ts, args.mt, args.en, args.ed)
-
 
 if __name__ == "__main__":
     main()
