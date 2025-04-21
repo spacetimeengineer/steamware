@@ -2,11 +2,26 @@
 
 
 import os, sys
-import shutil
 import argparse
 from loguru import logger
+import os
+from pathlib import Path
+from datetime import datetime
 
 
+def get_default_export_dir():
+    home = Path.home()
+
+    # Try to use the Documents folder if it exists
+    documents = home / "Documents"
+    if documents.exists() and documents.is_dir():
+        base_dir = documents
+    else:
+        base_dir = home
+
+    export_dir = base_dir / "steamware_exports"
+    export_dir.mkdir(parents=True, exist_ok=True)
+    return export_dir
 
 class STEAMWare:
     """ This class builds digital representations of STEAMWare elements."""
@@ -26,7 +41,7 @@ class STEAMWare:
         self.export_directory = export_directory # Directory where resources are delivered.
         self.export_name = export_name # Name of the export file/directory.
         
-        self.steamware_element_directory = self.export_directory + "/" +  self.export_name # The directory where the steamware element is stored.
+        self.steamware_element_directory = Path(self.export_directory) / self.export_name # The directory where the steamware element is stored.
         if not os.path.exists(self.export_directory):
             
             logger.info("Creating export directory : " + self.export_directory ) # Log export directory creation.   
@@ -35,23 +50,23 @@ class STEAMWare:
             
         else: # If export directory already exists.
             
-            logger.info("Export directory : " + self.export_directory + " already exists." ) # Log export directory already exists.
+            logger.info(f"Export directory : {self.export_directory} already exists." ) # Log export directory already exists.
             
         if not os.path.exists(self.steamware_element_directory): # If steamware element directory does not exist.
             
-            logger.info("Creating steamware element directory : " + self.steamware_element_directory ) # Log steamware element directory creation.
-            os.system("mkdir "+ self.steamware_element_directory) # Create steamware element directory.
+            logger.info(f"Creating steamware element directory : {self.steamware_element_directory}") # Log steamware element directory creation.
+            os.system("mkdir "+ str(self.steamware_element_directory)) # Create steamware element directory.
             
         else: # If steamware element directory already exists.
             
             logger.info("Steamware element directory : " + self.steamware_element_directory + " already exists." ) # Log steamware element directory already exists.
             
             
-        self.scad_file_name = export_directory + "/" + export_name + "/" + export_name +".scad" # The actual name of the scad file that is represented by the system code.
+        self.scad_file_name = str(export_directory) + "/" + str(export_name) + "/" + export_name +".scad" # The actual name of the scad file that is represented by the system code.
         self.scad_file = open(self.scad_file_name, 'w+')  # open file in append mode
 
 
-        os.system("cp -R "+os.path.dirname(__file__)+"/steamware.scad "+ self.steamware_element_directory) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
+        os.system("cp -R "+os.path.dirname(__file__)+"/steamware.scad "+ str(self.steamware_element_directory)) # On Linux, copies from relevent scad libraries into 'steamware element directory' to perfrom work and uses system codes and CONFIG CODES in particular to feed parametrization into. Libraries are intented to be removed after function has been fufilled.
         self.scad_file.write('\n\n// STEAMWare Export Name: '+str(self.export_name)+'\n') # Write export name to scad file.
         self.scad_file.write('// STEAMWare Export Directory: '+str(self.export_directory)+'\n') # Write export directory to scad file.
         self.scad_file.write('// STEAMWare Track String Identity: '+str(self.track_string)+'\n\n') # Write track string identity to scad file.
@@ -116,7 +131,6 @@ class STEAMWare:
             self.transcribe_configuration(INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION) # Transcribe the configuration to the scad file.
         
         self.scad_file.close() # Finish writing scad script.
-
 
     
     def transcribe_configuration(self, INSTRUCTION, NEXT_INSTRUCTION, PREVIOUS_INSTRUCTION): # Transcribes the configuration to the scad file.
@@ -955,7 +969,7 @@ def main():
         "--en", "--export_name",
         help="Name of the export file/directory (required).",
         type=str,
-        required=True
+        default=f"se-{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}",
     )
     parser.add_argument(
         "--ts", "--track_string",
@@ -967,7 +981,7 @@ def main():
         "--ed", "--export_directory",
         help="Directory to save the exported files (default: ./steamware_exports).",
         type=str,
-        default="./steamware_exports"
+        default=get_default_export_dir()
     )
     parser.add_argument(
         "--bu", "--basis_unit",

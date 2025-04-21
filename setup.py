@@ -37,6 +37,7 @@ setup(
     entry_points={
         "console_scripts": [
             "steamware=steamware:main",
+            "sw=steamware:main",
         ],
     },
     classifiers=[
