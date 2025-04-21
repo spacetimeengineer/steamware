@@ -29,7 +29,6 @@ venv/
 *.swo
 
 # OpenSCAD files
-*.scad
 *.stl
 *.png
 
